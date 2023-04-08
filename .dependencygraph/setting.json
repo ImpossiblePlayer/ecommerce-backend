@@ -1,0 +1,12 @@
+{
+	"alias": {
+		"src/*": "src\\*",
+		"shared/*": "src\\shared\\*",
+		"models/*": "src\\models\\*",
+		"controllers/*": "src\\controllers\\*",
+		"utils/*": "src\\utils\\*",
+		"__test__/*": "__test__\\*"
+	},
+	"resolveExtensions": [".js", ".jsx", ".ts", ".tsx", ".vue", ".scss", ".less"],
+	"entryFilePath": "dist/index.js"
+}

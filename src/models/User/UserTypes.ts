@@ -1,47 +1,38 @@
-import { SellerReviewType } from '../Product/ProductModelTypes';
-
-type SocialMediaType = {
+export type TUserSocialMedia = {
 	facebook: string;
 	twitter: string;
 	instagram: string;
 };
-
-type ContactDetailsType = {
+export type TUserContacts = {
 	phone: string;
 	email: string;
-	socialMedia?: Partial<SocialMediaType>;
+	socialMedia?: Partial<TUserSocialMedia>;
 };
-
-export type AddressType = {
+export type TUserAddress = {
 	country: string;
 	city: string;
 	street: string;
 	house: string;
-	zipCode: string;
+	postalCode: string;
 };
-
-export type DeliverySellerType = {
-	cost: number;
-	regions: string[]; // Массив регионов, в которые осуществляется доставка
-};
-
-export type UserType = {
+export type TUserSchema = {
 	name: string;
-	photo: string;
-	address?: Partial<AddressType>;
-	contacts?: Partial<ContactDetailsType>;
+	role: 'admin' | 'user' | 'seller';
+	profilePic: string;
+	address?: Partial<TUserAddress>;
+	socialMedia?: Partial<TUserContacts>;
+	email: string;
+	hash: string;
+	refreshToken?: string[];
 };
 
-export type SellerType = UserType & {
-	supplierCompany: string;
-	isVerified: boolean;
-	isWorldwideShipping: boolean;
-	description: string;
-	delivery: DeliverySellerType;
-	paymentMethods: string[]; // Массив способов оплаты
-	returnPolicy: string; // Описание политики возврата товара
-	categories: string[]; // Массив категорий товаров
-	brands: string[]; // Массив брендов товаров
-	rating: number;
-	reviews: SellerReviewType[]; // Массив отзывов покупателей
+export type TUserMethods = {
+	setPassword(password: string): Promise<void>;
 };
+
+export type TUserQueries = {
+	comparePassword(password: string): Promise<boolean>;
+	compareRefreshToken(token: string): Promise<boolean>;
+};
+
+export type TUserModel = TUserSchema & TUserMethods & TUserQueries;
