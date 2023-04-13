@@ -1,8 +1,7 @@
 import { Schema } from 'mongoose';
-import { TUserSchema } from '../User/UserTypes';
 
 type TReview = {
-	author: TUserSchema;
+	author: Schema.Types.ObjectId;
 	rating: number;
 	likes: number;
 	dislikes: number;

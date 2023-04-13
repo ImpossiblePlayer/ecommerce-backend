@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { HTTP_STATUSE_CODES } from 'src/constants';
+import { HTTP_STATUSE_CODES } from '../constants';
 
 export const CategoryRouter = Router();
 

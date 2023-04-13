@@ -9,4 +9,5 @@ export const enum HTTP_STATUSE_CODES {
 	ITERNAL_ERROR_500 = 500,
 }
 
-export const SECRET = process.env.SECRET;
+export const JWT_REFRESH_SECRET_KEY = process.env.JWT_REFRESH_SECRET_KEY;
+export const JWT_ACCESS_SECRET_KEY = process.env.JWT_ACCESS_SECRET_KEY;

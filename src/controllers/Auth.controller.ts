@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { HTTP_STATUSE_CODES } from 'src/constants';
-import { User } from 'src/models/User';
+import { HTTP_STATUSE_CODES } from '../constants';
+import { User } from '../models/User.model';
 
 export const Register = async (req: Request, res: Response) => {
 	try {

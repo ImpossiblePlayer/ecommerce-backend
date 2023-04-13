@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { CheckAuthentication } from 'utils/CheckAuth';
-import { Authorize, Register } from 'controllers/AuthController';
+import { CheckAuthentication } from '../utils/CheckAuth.util';
+import { Authorize, Register } from '../controllers/Auth.controller';
 
 export const UserRouter = Router();
 

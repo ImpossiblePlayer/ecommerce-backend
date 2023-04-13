@@ -3,12 +3,12 @@ import cors from 'cors';
 import fileUpload from 'express-fileupload';
 import cookieParser from 'cookie-parser';
 
-require('dotenv').config(); // переменные из .env файла
+require('dotenv').config(); // переменные из .env файл
 
-import database from './database';
-import { UserRouter } from './routes/UserRoutes';
-import { ProductRouter } from './routes/ProductRoutes';
-import { CategoryRouter } from './routes/CategoriesRouter';
+import { Database } from './database';
+import { UserRouter } from './routes/User.router';
+import { ProductRouter } from './routes/Product.router';
+import { CategoryRouter } from './routes/Categories.router';
 
 const port = process.env.PORT ?? 3000;
 
@@ -17,7 +17,7 @@ app.use(cors()).use(express.json()).use(fileUpload({})).use(cookieParser());
 
 app.use(UserRouter).use(ProductRouter).use(CategoryRouter);
 
-database.connect();
+Database.connect();
 app.listen(port, () => {
 	console.log(`listening on port ${port}`);
 });

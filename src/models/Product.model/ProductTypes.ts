@@ -1,4 +1,4 @@
-import { TProductReview } from '../Review/ReviewTypes';
+import { TProductReview } from '../Review.model/ReviewTypes';
 import type { Document, Schema } from 'mongoose';
 
 export type TProductPhoto = {

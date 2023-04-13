@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 mongoose.set('strictQuery', false);
 
-class Database {
-	connect = async () => {
+export class Database {
+	static connect = async () => {
 		await mongoose
 			.connect(process.env.DATABASE_URL)
 			.then(() => {
@@ -14,5 +14,3 @@ class Database {
 			});
 	};
 }
-
-export default new Database();

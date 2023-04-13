@@ -96,31 +96,28 @@
 	//--"skipLibCheck": true /* Skip type checking all .d.ts files. */,
 
 	"compilerOptions": {
-		"target": "ES2015",
+		"target": "ES2020",
 		"module": "commonjs",
-		"outDir": "./dist",
 		"allowJs": true /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */,
 		"checkJs": true /* Enable error reporting in type-checked JavaScript files. */,
 		"removeComments": true,
 		"preserveConstEnums": true,
 		"esModuleInterop": true,
 
-		// "typeRoots": [
-		// 	"./src/types"
-		// ] /* Specify multiple folders
-		// that act like './node_modules/@types'. */,
+		"baseUrl": ".",
+		// "paths": {
+		// 	"@src/*": ["./src/*"],
+		// 	"@shared/*": ["./src/shared/*"],
+		// 	"@models/*": ["./src/models/*"],
+		// 	"@controllers/*": ["./src/controllers/*"],
+		// 	"@routes/*": ["./src/routes/*"],
+		// 	"@utils/*": ["./src/utils/*"]
+		// },
+		"outDir": "./dist",
 		"sourceMap": true,
-
-		"baseUrl": "./",
-		"paths": {
-			"src/*": ["./src/*"],
-			"shared/*": ["./src/shared/*"],
-			"models/*": ["./src/models/*"],
-			"controllers/*": ["./src/controllers/*"],
-			"utils/*": ["./src/utils/*"],
-			"__test__/*": ["./__test__/*"]
-		}
+		"skipLibCheck": true
 	},
-	"include": ["src/"],
+	"typescript.preferences.importModuleSpecifier": "realpath",
+	"include": ["./src/"],
 	"exclude": ["node_modules", "**/*.spec.ts", "jest.config.js", "__tests__"]
 }

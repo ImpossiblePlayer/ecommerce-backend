@@ -7,8 +7,8 @@ import type {
 	IProductSchema,
 	TProductMethods,
 } from './ProductTypes';
-import { ProductReview, ProductReviewSchema } from '../Review';
-import { Seller } from '../Seller';
+import { ProductReview, ProductReviewSchema } from '../Review.model';
+import { Seller } from '../Seller.model';
 
 const ProductPhotoSchema = new Schema<TProductPhoto>({
 	url: { type: Schema.Types.UUID, required: true },

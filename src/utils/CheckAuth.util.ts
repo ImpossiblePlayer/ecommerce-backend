@@ -2,8 +2,8 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 import type { NextFunction, Request, Response } from 'express';
 
-import { HTTP_STATUSE_CODES, SECRET } from 'src/constants';
-import { User } from 'models/User';
+import { HTTP_STATUSE_CODES, JWT_REFRESH_SECRET_KEY } from '../constants';
+import { User } from '../models/User.model';
 
 interface Req extends Request {
 	userId: string;
@@ -20,7 +20,10 @@ export const CheckAuthentication = (
 	if (token) {
 		try {
 			// проверяем валидность токена
-			const decodedToken: JwtPayload = jwt.verify(token, SECRET) as JwtPayload;
+			const decodedToken: JwtPayload = jwt.verify(
+				token,
+				JWT_REFRESH_SECRET_KEY
+			) as JwtPayload;
 
 			req.userId = decodedToken._id; // и возвращаем id пользователя
 			const candidate = User;

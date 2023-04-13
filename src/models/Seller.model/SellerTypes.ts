@@ -1,5 +1,5 @@
-import { TSellerReview } from '../Review/ReviewTypes';
-import { TUserSchema, TUserModel } from 'models/User/UserTypes';
+import { TSellerReview } from '../Review.model/ReviewTypes';
+import { TUserSchema, TUserModel } from '../User.model/UserTypes';
 
 export type TSellerDelivery = {
 	cost: number;

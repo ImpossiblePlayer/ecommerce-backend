@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
+import { TCategorySchema } from './CategoryTypes';
 
-const CategorySchema = new Schema({
+const CategorySchema = new Schema<TCategorySchema>({
 	name: { type: String, required: true, trim: true },
 	subCategories: { type: [String], trim: true },
 	products: { type: [Schema.Types.ObjectId], ref: 'Product', required: true },
@@ -10,4 +11,4 @@ const CategorySchema = new Schema({
 // 	return this.products;
 // };
 
-export const Category = model('Category', CategorySchema);
+export const Category = model<TCategorySchema>('Category', CategorySchema);
