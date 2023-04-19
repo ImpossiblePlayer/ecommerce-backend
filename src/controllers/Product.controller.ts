@@ -1,7 +1,8 @@
-import { HTTP_STATUSE_CODES } from '../../constants';
-import { Product } from '../../models/Product.model';
+import type { Request, Response } from 'express';
+import { HTTP_STATUSE_CODES } from '../constants';
+import { Product } from '../models/Product.model';
 
-export const GetProduct = async (req, res) => {
+export const GetProduct = async (req: Request, res: Response) => {
 	try {
 		const candidate = await Product.findById(req.params.productId);
 		if (candidate) {

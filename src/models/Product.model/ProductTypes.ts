@@ -1,5 +1,6 @@
+import { IDocument } from '..';
 import { TProductReview } from '../Review.model/ReviewTypes';
-import type { Document, Schema } from 'mongoose';
+import type { Schema } from 'mongoose';
 
 export type TProductPhoto = {
 	url: typeof Schema.Types.UUID;
@@ -14,10 +15,7 @@ export type TProductPrice = {
 	old?: number;
 };
 
-interface IProduct<T> extends Document {
-	_doc: T;
-}
-export interface IProductSchema extends IProduct<IProductSchema> {
+export interface IProductSchema extends IDocument<IProductSchema> {
 	name: string;
 	categories: string[]; // ['clothing', 'men's wear', 'summer wear']
 	quantity: number;

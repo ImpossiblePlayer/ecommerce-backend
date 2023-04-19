@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { HTTP_STATUSE_CODES } from '../constants';
 import { User } from '../models/User.model';
 
-export const Register = async (req: Request, res: Response) => {
+const Register = async (req: Request, res: Response) => {
 	try {
 		const name = req.body.name.trim();
 		const email = req.body.email.trim();
@@ -27,7 +27,7 @@ export const Register = async (req: Request, res: Response) => {
 	}
 };
 
-export const Authorize = async (req, res) => {
+const Authorize = async (req: Request, res: Response) => {
 	const email = req.body.email.trim();
 	const password = req.body.password;
 	if (!(email && password)) {
@@ -47,3 +47,5 @@ export const Authorize = async (req, res) => {
 					.json({ message: 'incorrect password' });
 	}
 };
+
+export { Authorize, Register };

@@ -6,7 +6,7 @@
 		"dev": "nodemon --inspect ./dist/index.js",
 		"test": "jest",
 		"build": "tsc ",
-		"build:watch": "yarn && yarn build -w"
+		"build:watch": "install && yarn build -w"
 	},
 	"dependencies": {
 		"bcrypt": "^5.1.0",

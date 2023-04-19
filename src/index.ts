@@ -12,12 +12,17 @@ import { CategoryRouter } from './routes/Categories.router';
 
 const port = process.env.PORT ?? 3000;
 
-export const app = express();
+const app = express();
 app.use(cors()).use(express.json()).use(fileUpload({})).use(cookieParser());
 
-app.use(UserRouter).use(ProductRouter).use(CategoryRouter);
+app
+	.use('/user', UserRouter)
+	.use('/product', ProductRouter)
+	.use('/category', CategoryRouter);
 
 Database.connect();
 app.listen(port, () => {
 	console.log(`listening on port ${port}`);
 });
+
+export { app };

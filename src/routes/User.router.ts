@@ -1,10 +1,13 @@
 import { Router } from 'express';
-import { CheckAuthentication } from '../utils/CheckAuth.util';
-import { Authorize, Register } from '../controllers/Auth.controller';
+import { AuthenticationMiddleware } from '../middleware/Auth.middleware';
+import { Authorize, Register } from '../controllers/User.controller';
 
-export const UserRouter = Router();
+const UserRouter = Router();
 
-UserRouter.use(CheckAuthentication);
+UserRouter.use(AuthenticationMiddleware);
 
 UserRouter.post('/login', Authorize);
-UserRouter.post('/register', Register);
+UserRouter.post('/', Register);
+UserRouter.delete('/');
+
+export { UserRouter };

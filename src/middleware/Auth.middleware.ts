@@ -10,7 +10,7 @@ interface Req extends Request {
 	cookies: { authentication: string };
 }
 
-export const CheckAuthentication = (
+export const AuthenticationMiddleware = (
 	req: Req,
 	res: Response,
 	next: NextFunction
@@ -26,7 +26,7 @@ export const CheckAuthentication = (
 			) as JwtPayload;
 
 			req.userId = decodedToken._id; // и возвращаем id пользователя
-			const candidate = User;
+			const candidate = User.findOne({});
 			if (!candidate) {
 				return res
 					.status(HTTP_STATUSE_CODES.BAD_REQUEST_400)
@@ -41,7 +41,7 @@ export const CheckAuthentication = (
 		}
 	}
 
-	res
+	return res
 		.status(HTTP_STATUSE_CODES.FORBIDDEN_403)
 		.json({ message: 'can not access' });
 };

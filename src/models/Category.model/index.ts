@@ -1,14 +1,17 @@
 import { Schema, model } from 'mongoose';
-import { TCategorySchema } from './CategoryTypes';
 
-const CategorySchema = new Schema<TCategorySchema>({
+import { Product } from '../Product.model';
+
+import type { ICategorySchema } from './CategoryTypes';
+
+const CategorySchema = new Schema<ICategorySchema>({
 	name: { type: String, required: true, trim: true },
-	subCategories: { type: [String], trim: true },
-	products: { type: [Schema.Types.ObjectId], ref: 'Product', required: true },
+	subCategories: { type: [Schema.Types.ObjectId], ref: 'Category' },
+	products: { type: [Schema.Types.ObjectId], ref: Product, required: true },
 });
 
 // CategorySchema.static.getProducts = async function () {
 // 	return this.products;
 // };
 
-export const Category = model<TCategorySchema>('Category', CategorySchema);
+export const Category = model<ICategorySchema>('Category', CategorySchema);
