@@ -1,6 +1,12 @@
 {
 	"installCommand": "yarn install",
 	"buildCommand": "yarn build",
+	"builds": [
+		{
+			"src": "./dist/index.js",
+			"use": "@vercel/node"
+		}
+	],
 	"outputDirectory": "dist",
 	"rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
