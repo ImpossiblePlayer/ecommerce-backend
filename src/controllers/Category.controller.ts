@@ -1,10 +1,13 @@
-import type { Request, Response } from 'express';
-import { HTTP_STATUSE_CODES } from '../constants';
 import { Category } from '../models/Category.model';
+
+import { HTTP_STATUSE_CODES } from '../constants';
+
+import type { Request, Response } from 'express';
 
 export const GetCategories = async (req: Request, res: Response) => {
 	try {
-		const candidate = await Category.findOne({});
+		const { categoryName } = req.params;
+		const candidate = await Category.findOne({ name: categoryName });
 	} catch (err) {
 		return res.status(HTTP_STATUSE_CODES.ITERNAL_ERROR_500);
 	}

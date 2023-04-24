@@ -3,7 +3,7 @@ import { SellerReview, SellerReviewSchema } from '../Review.model';
 import { User } from '../User.model';
 
 import type {
-	TSellerSchema,
+	ISellerSchema,
 	TSellerModel,
 	TSellerDelivery,
 } from './SellerTypes';
@@ -13,7 +13,7 @@ const SellerDeliverySchema = new Schema<TSellerDelivery>({
 	regions: [String], // Массив регионов, в которые осуществляется доставка
 });
 
-export const SellerSchema = new Schema<TSellerSchema>({
+export const SellerSchema = new Schema<ISellerSchema>({
 	supplierCompany: { type: String, trim: true },
 	isVerified: Boolean,
 	isWorldwideShipping: Boolean,

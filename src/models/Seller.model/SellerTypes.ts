@@ -1,12 +1,13 @@
+import { IDocument } from '../models';
 import { TSellerReview } from '../Review.model/ReviewTypes';
-import { TUserSchema, TUserModel } from '../User.model/UserTypes';
+import { IUserSchema, TUserModel } from '../User.model/UserTypes';
 
 export type TSellerDelivery = {
 	cost: number;
 	regions: string[]; // Массив регионов, в которые осуществляется доставка
 };
 
-export type TSellerSchema = TUserSchema & {
+export interface ISellerSchema extends IUserSchema {
 	supplierCompany: string; // Комнания-поставщик
 	isVerified: boolean;
 	isWorldwideShipping: boolean;
@@ -18,5 +19,5 @@ export type TSellerSchema = TUserSchema & {
 	brands: string[]; // Массив брендов товаров
 	rating: number;
 	reviews: TSellerReview[]; // Массив отзывов покупателей
-};
-export type TSellerModel = TUserModel & TSellerSchema;
+}
+export type TSellerModel = TUserModel & ISellerSchema;

@@ -102,22 +102,27 @@
 		"checkJs": true /* Enable error reporting in type-checked JavaScript files. */,
 		"removeComments": true,
 		"preserveConstEnums": true,
+		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
-
-		"baseUrl": ".",
-		// "paths": {
-		// 	"@src/*": ["./src/*"],
-		// 	"@shared/*": ["./src/shared/*"],
-		// 	"@models/*": ["./src/models/*"],
-		// 	"@controllers/*": ["./src/controllers/*"],
-		// 	"@routes/*": ["./src/routes/*"],
-		// 	"@utils/*": ["./src/utils/*"]
-		// },
-		"outDir": "./dist",
 		"sourceMap": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+
+		"baseUrl": "src",
+		"paths": {
+			"@src/*": ["*"],
+			"@shared/*": ["shared/*"],
+			"@models/*": ["models/*"],
+			"@controllers/*": ["controllers/*"],
+			"@routes/*": ["routes/*"],
+			"@utils/*": ["utils/*"]
+		},
+		"rootDir": "./src",
+		"outDir": "./dist"
+	},
+	"ts-node": {
+		"require": ["tsconfig-paths/register"]
 	},
 	"typescript.preferences.importModuleSpecifier": "realpath",
-	"include": ["./src/"],
+	"include": ["./src"],
 	"exclude": ["node_modules", "**/*.spec.ts", "jest.config.js", "__tests__"]
 }

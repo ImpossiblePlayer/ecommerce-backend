@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import { HTTP_STATUSE_CODES } from '../constants';
+
 import { GetCategories } from '../controllers/Category.controller';
 
 const CategoryRouter = Router();
@@ -243,10 +244,10 @@ CategoryRouter.get(
 			});
 		} catch (err) {
 			res.status(HTTP_STATUSE_CODES.ITERNAL_ERROR_500);
-			next();
+			// next();
 		}
-	},
-	GetCategories
+	}
+	// GetCategories
 );
 
 export { CategoryRouter };

@@ -1,3 +1,6 @@
+import { Schema, WindowOperatorReturningNumber } from 'mongoose';
+import { IDocument } from '../models';
+
 export type TUserSocialMedia = {
 	facebook: string;
 	twitter: string;
@@ -6,7 +9,7 @@ export type TUserSocialMedia = {
 export type TUserContacts = {
 	phone: string;
 	email: string;
-	socialMedia?: Partial<TUserSocialMedia>;
+	socialMedia: Partial<TUserSocialMedia>;
 };
 export type TUserAddress = {
 	country: string;
@@ -15,16 +18,16 @@ export type TUserAddress = {
 	house: string;
 	postalCode: string;
 };
-export type TUserSchema = {
+export interface IUserSchema extends IDocument<IUserSchema> {
 	name: string;
-	role: 'admin' | 'user' | 'seller';
+	role: 'customer' | 'seller';
 	profilePic: string;
 	address?: Partial<TUserAddress>;
 	socialMedia?: Partial<TUserContacts>;
 	email: string;
 	hash: string;
-	refreshToken?: string[];
-};
+	refreshToken: string[];
+}
 
 export type TUserMethods = {
 	setPassword(password: string): Promise<void>;
@@ -33,6 +36,9 @@ export type TUserMethods = {
 export type TUserQueries = {
 	comparePassword(password: string): Promise<boolean>;
 	compareRefreshToken(token: string): Promise<boolean>;
+	getData(): Promise<
+		Pick<IUserSchema, 'name' & 'profilePic' & 'socialMedia' & 'role'>
+	>;
 };
 
-export type TUserModel = TUserSchema & TUserMethods & TUserQueries;
+export type TUserModel = IUserSchema & TUserMethods & TUserQueries;

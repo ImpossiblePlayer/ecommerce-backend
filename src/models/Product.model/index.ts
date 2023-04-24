@@ -9,6 +9,7 @@ import type {
 	TProductSpecification,
 	IProductSchema,
 	TProductMethods,
+	TProductQueries,
 } from './ProductTypes';
 
 const ProductPhotoSchema = new Schema<TProductPhoto>({
@@ -27,12 +28,14 @@ const ProductSpecificationSchema = new Schema<TProductSpecification>({
 export const ProductSchema = new Schema<
 	IProductSchema,
 	{},
-	{},
-	TProductMethods
+	TProductMethods,
+	TProductQueries
 >({
 	name: { type: String, required: true, trim: true },
+	description: { type: String, required: true },
 	categories: { type: [String], required: true, trim: true },
 	quantity: { type: Number, required: true },
+	params: [ProductSpecificationSchema],
 	mainPhoto: { type: ProductPhotoSchema, required: true },
 	additionalPhotos: [ProductPhotoSchema],
 	price: { type: ProductPriceSchema, required: true },
@@ -43,10 +46,8 @@ export const ProductSchema = new Schema<
 	},
 	rating: { type: Number, required: true },
 	soldQuantity: { type: Number, required: true },
-	description: { type: String, required: true },
 	orders: { type: Number, required: true },
 	specifications: [ProductSpecificationSchema],
-	params: [ProductSpecificationSchema],
 	advantages: { type: [String], required: true },
 	reviewsCount: { type: Number, required: true },
 	reviews: { type: [ProductReviewSchema], ref: ProductReview },
@@ -55,16 +56,49 @@ export const ProductSchema = new Schema<
 
 ProductSchema.methods.createProduct = async function (
 	name: string,
-	categories: string,
+	description: string,
+	categories: string[],
 	quantity: number,
 	photos: string[],
 	price: TProductPrice
 ): Promise<void> {
 	this.name = name;
-	this.categorise = categories;
+	this.description = description;
+	this.categories = categories;
 	this.quantity = quantity;
-	this.photos = photos;
+	this.mainPhoto = photos[0];
+	this.additionalPhotos = photos;
 	this.price = price;
+};
+
+ProductSchema.query.updateProduct = async function (
+	name: string,
+	description: string,
+	categories: string[],
+	quantity: number,
+	photos: string[],
+	price: TProductPrice
+): Promise<boolean> {
+	if (
+		name == this.name ||
+		description == this.description ||
+		categories == this.categories ||
+		quantity == this.quantity ||
+		price.current == this.price.current ||
+		price.old == this.price.old ||
+		photos == this.photos
+	) {
+		return false;
+	}
+
+	this.name = name;
+	this.description = description;
+	this.categories = categories;
+	this.quantity = quantity;
+	this.mainPhoto = photos[0];
+	this.additionalPhotos = photos;
+	this.price = price;
+	return true;
 };
 
 export const Product = model<IProductSchema>('Product', ProductSchema);

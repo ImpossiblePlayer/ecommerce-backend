@@ -3,11 +3,11 @@ import bcrypt from 'bcrypt';
 
 import type {
 	TUserAddress,
+	TUserSocialMedia,
 	TUserQueries,
 	TUserMethods,
-	TUserSocialMedia,
 	TUserModel,
-	TUserSchema,
+	IUserSchema,
 } from './UserTypes';
 
 const AddressSchema = new Schema<TUserAddress>({
@@ -24,37 +24,33 @@ const SocialMediasSchema = new Schema<TUserSocialMedia>({
 });
 
 export const UserSchema = new Schema<
-	TUserSchema,
+	IUserSchema,
 	{},
 	TUserMethods,
 	TUserQueries
->(
-	{
-		name: {
-			type: String,
-			required: true,
-			match: [/^[a-zA-Z0-9]+$/, 'name is invalid'],
-			trim: true,
-		},
-		profilePic: {
-			type: String,
-			default: '/src/shared/assets/userPics/default.png',
-		},
-		address: { type: AddressSchema, required: false },
-		socialMedia: { type: SocialMediasSchema, required: false },
-		email: {
-			type: String,
-			lowercase: true,
-			unique: true,
-			required: [true, "can't be blank"],
-			match: [/\S+@\S+\.\S+/, 'is invalid'],
-			trim: true,
-		},
-		hash: { type: String, required: true },
-		refreshToken: { type: [String], unique: true, required: false },
+>({
+	name: {
+		type: String,
+		required: true,
+
+		trim: true,
 	},
-	{ timestamps: true }
-);
+	profilePic: {
+		type: String,
+		default: '/src/shared/assets/userPics/default.png',
+	},
+	address: AddressSchema,
+	socialMedia: SocialMediasSchema,
+	email: {
+		type: String,
+		lowercase: true,
+		unique: true,
+		required: true,
+		trim: true,
+	},
+	hash: { type: String, required: true },
+	refreshToken: [String],
+});
 
 UserSchema.methods.setPassword = async function (
 	password: string
@@ -71,7 +67,17 @@ UserSchema.query.comparePassword = async function (
 UserSchema.query.compareRefreshToken = function (
 	token: string
 ): Promise<boolean> {
-	return this.refreshToken.filter((refreshToken) => refreshToken == token);
+	return this.refreshToken.filter(
+		(refreshToken: string) => refreshToken == token
+	);
+};
+
+UserSchema.query.getData = async function () {
+	return {
+		name: this.name,
+		profilePic: this.profilePics,
+		socialMedia: this.socialMedia,
+	};
 };
 
 export const User = model<TUserModel>('User', UserSchema);

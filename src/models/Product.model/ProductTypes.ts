@@ -1,9 +1,9 @@
-import { IDocument } from '..';
+import { IDocument } from '../models';
 import { TProductReview } from '../Review.model/ReviewTypes';
 import type { Schema } from 'mongoose';
 
 export type TProductPhoto = {
-	url: typeof Schema.Types.UUID;
+	url: Schema.Types.UUID;
 	thumbUrl?: Schema.Types.UUID;
 };
 export type TProductSpecification = {
@@ -38,6 +38,7 @@ export interface IProductSchema extends IDocument<IProductSchema> {
 export type TProductMethods = {
 	createProduct(
 		name: string,
+		description: string,
 		categories: string[],
 		quantity: number,
 		photos: string[],
@@ -45,4 +46,15 @@ export type TProductMethods = {
 	): Promise<void>;
 };
 
-export type TProductModel = IProductSchema & TProductMethods;
+export type TProductQueries = {
+	updateProduct(
+		name: string,
+		description: string,
+		categories: string[],
+		quantity: number,
+		photos: string[],
+		price: TProductPrice
+	): Promise<boolean>;
+};
+
+export type TProductModel = IProductSchema & TProductMethods & TProductQueries;
