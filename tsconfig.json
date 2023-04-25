@@ -96,7 +96,7 @@
 	//--"skipLibCheck": true /* Skip type checking all .d.ts files. */,
 
 	"compilerOptions": {
-		"target": "ES2020",
+    "target": "ES2020",
 		"module": "CommonJS",
 		"allowJs": true /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */,
 		"checkJs": true /* Enable error reporting in type-checked JavaScript files. */,
@@ -113,7 +113,8 @@
 			"@models/*": ["models/*"],
 			"@controllers/*": ["controllers/*"],
 			"@routes/*": ["routes/*"],
-			"@utils/*": ["utils/*"]
+			"@utils/*": ["utils/*"],
+			"@middleware/*": ["middleware/*"]
 		},
 		"rootDir": "./src",
 		"outDir": "dist"
