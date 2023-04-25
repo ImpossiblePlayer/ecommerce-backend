@@ -1,6 +1,6 @@
 import { IDocument } from '../models';
-import { TSellerReview } from '../Review.model/ReviewTypes';
-import { IUserSchema, TUserModel } from '../User.model/UserTypes';
+import { TSellerReview } from '../ReviewModel/ReviewTypes';
+import { IUserSchema, TUserModel } from '../UserModel/UserTypes';
 
 export type TSellerDelivery = {
 	cost: number;

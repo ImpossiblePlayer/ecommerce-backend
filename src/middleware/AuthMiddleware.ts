@@ -2,7 +2,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 import { HTTP_STATUSE_CODES, JWT_REFRESH_SECRET_KEY } from '../constants';
 
-import { User } from '../models/User.model';
+import { User } from '../models/UserModel';
 import type { NextFunction, Request, Response } from 'express';
 
 interface Req extends Request {

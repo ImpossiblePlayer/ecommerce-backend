@@ -6,9 +6,9 @@ import cookieParser from 'cookie-parser';
 require('dotenv').config(); // переменные из .env файл
 
 import { Database } from './database';
-import { UserRouter } from './routes/User.router';
-import { ProductRouter } from './routes/Product.router';
-import { CategoryRouter } from './routes/Categories.router';
+import { UserRouter } from './routes/UserRouter';
+import { ProductRouter } from './routes/ProductRouter';
+import { CategoryRouter } from './routes/CategoriesRouter';
 
 const port = process.env.PORT ?? 3000;
 

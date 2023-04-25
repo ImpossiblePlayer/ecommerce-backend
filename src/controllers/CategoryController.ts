@@ -1,4 +1,4 @@
-import { Category } from '../models/Category.model';
+import { Category } from '../models/CategoryModel';
 
 import { HTTP_STATUSE_CODES } from '../constants';
 

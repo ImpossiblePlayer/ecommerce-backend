@@ -1,4 +1,4 @@
-import { Product } from '../models/Product.model';
+import { Product } from '../models/ProductModel';
 
 import { HTTP_STATUSE_CODES } from '../constants';
 

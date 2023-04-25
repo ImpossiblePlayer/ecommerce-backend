@@ -3,7 +3,7 @@ import {
 	CreateProduct,
 	GetProduct,
 	UpdateProduct,
-} from '../controllers/Product.controller';
+} from '../controllers/ProductController';
 
 const ProductRouter = Router();
 

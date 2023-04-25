@@ -1,4 +1,4 @@
-import { User } from '../../models/User.model';
+import { User } from '../../models/UserModel';
 
 import { HTTP_STATUSE_CODES } from '../../constants';
 

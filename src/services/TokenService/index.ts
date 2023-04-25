@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { User } from '../../models/User.model/index.js';
+import { User } from '../../models/UserModel/index.js';
 import {
 	JWT_ACCESS_SECRET_KEY,
 	JWT_REFRESH_SECRET_KEY,

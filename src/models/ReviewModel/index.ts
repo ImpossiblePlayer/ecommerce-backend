@@ -4,7 +4,7 @@ import {
 	TProductReview,
 	TSellerReview,
 } from './ReviewTypes';
-import { User } from '../User.model';
+import { User } from '../UserModel';
 
 const ProductReviewTextSchema = new Schema<TProductReviewText>({
 	advantages: { type: String, default: '', trim: true },

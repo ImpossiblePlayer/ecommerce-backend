@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-import { Product } from '../Product.model';
+import { Product } from '../ProductModel';
 
 import type { ICategorySchema, TCategoryQueries } from './CategoryTypes';
 

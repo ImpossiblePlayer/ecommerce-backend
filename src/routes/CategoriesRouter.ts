@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { HTTP_STATUSE_CODES } from '../constants';
 
-import { GetCategories } from '../controllers/Category.controller';
+import { GetCategories } from '../controllers/CategoryController';
 
 const CategoryRouter = Router();
 

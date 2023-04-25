@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import { SellerReview, SellerReviewSchema } from '../Review.model';
-import { User } from '../User.model';
+import { SellerReview, SellerReviewSchema } from '../ReviewModel';
+import { User } from '../UserModel';
 
 import type {
 	ISellerSchema,
