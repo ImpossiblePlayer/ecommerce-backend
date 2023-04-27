@@ -1,5 +1,9 @@
 {
 	"version": 2,
+	"buildCommand": "yarn run build",
+	"devCommand": "yarn run dev",
+	"installCommand": "yarn install",
+	"outputDirectory": "dist",
 	"builds": [
 		{
 			"src": "src/index.ts",
