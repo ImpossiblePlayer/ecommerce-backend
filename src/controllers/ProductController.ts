@@ -3,6 +3,7 @@ import { Product } from '../models/ProductModel';
 import { HTTP_STATUSE_CODES } from '../constants';
 
 import type { Request, Response } from 'express';
+import { OK_200 } from '../services/ApiService';
 
 export const GetProduct = async (req: Request, res: Response) => {
 	try {
@@ -15,9 +16,7 @@ export const GetProduct = async (req: Request, res: Response) => {
 				.json({ message: `there is no product with id '${productId}'` });
 		}
 		const productData = product._doc;
-		return res
-			.status(HTTP_STATUSE_CODES.OK_200)
-			.json({ ...productData, id: product._id });
+		return OK_200(res, { ...productData, id: product._id });
 	} catch (err) {
 		return res.status(HTTP_STATUSE_CODES.ITERNAL_ERROR_500);
 	}

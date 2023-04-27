@@ -96,7 +96,7 @@
 	//--"skipLibCheck": true /* Skip type checking all .d.ts files. */,
 
 	"compilerOptions": {
-    "target": "ES2020",
+		"target": "ES2020",
 		"module": "CommonJS",
 		"allowJs": true /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */,
 		"checkJs": true /* Enable error reporting in type-checked JavaScript files. */,
@@ -117,12 +117,12 @@
 			"@middleware/*": ["middleware/*"]
 		},
 		"rootDir": "./src",
-		"outDir": "dist"
+		"outDir": "./dist"
 	},
 	"ts-node": {
 		"require": ["tsconfig-paths/register"]
 	},
 	"typescript.preferences.importModuleSpecifier": "realpath",
-	"include": ["./src"],
+	"include": ["src"],
 	"exclude": ["node_modules", "**/*.spec.ts", "jest.config.js", "__tests__"]
 }
