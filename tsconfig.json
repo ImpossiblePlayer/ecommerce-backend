@@ -117,7 +117,7 @@
 			"@middleware/*": ["middleware/*"]
 		},
 		"rootDir": "./src",
-		"outDir": "dist"
+		"outDir": "./dist"
 	},
 	"ts-node": {
 		"require": ["tsconfig-paths/register"]
