@@ -1,9 +1,6 @@
 import jwt from 'jsonwebtoken';
-import { User } from '../../models/UserModel/index.js';
-import {
-	JWT_ACCESS_SECRET_KEY,
-	JWT_REFRESH_SECRET_KEY,
-} from '../../constants.js';
+import { User } from '../../models/UserModel';
+import { JWT_ACCESS_SECRET_KEY, JWT_REFRESH_SECRET_KEY } from '../../constants';
 
 export const generateTokens = (payload) => {
 	const accessToken = jwt.sign(payload, JWT_ACCESS_SECRET_KEY, {
@@ -13,10 +10,7 @@ export const generateTokens = (payload) => {
 		expiresIn: '30d',
 	});
 
-	return {
-		accessToken,
-		refreshToken,
-	};
+	return [accessToken, refreshToken];
 };
 
 export const saveToken = async (userId: string, refreshToken: string) => {

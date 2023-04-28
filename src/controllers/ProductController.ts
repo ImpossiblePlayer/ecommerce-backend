@@ -1,9 +1,12 @@
 import { Product } from '../models/ProductModel';
 
-import { HTTP_STATUSE_CODES } from '../constants';
+import {
+	OK_200,
+	NotFound_404,
+	InternalError_500,
+} from '../services/ApiService';
 
 import type { Request, Response } from 'express';
-import { OK_200 } from '../services/ApiService';
 
 export const GetProduct = async (req: Request, res: Response) => {
 	try {
@@ -11,14 +14,14 @@ export const GetProduct = async (req: Request, res: Response) => {
 
 		const product = await Product.findById(productId);
 		if (!product) {
-			return res
-				.status(HTTP_STATUSE_CODES.NOT_FOUND_404)
-				.json({ message: `there is no product with id '${productId}'` });
+			return NotFound_404(res, {
+				message: `there is no product with id '${productId}'`,
+			});
 		}
 		const productData = product._doc;
 		return OK_200(res, { ...productData, id: product._id });
 	} catch (err) {
-		return res.status(HTTP_STATUSE_CODES.ITERNAL_ERROR_500);
+		return InternalError_500(res);
 	}
 };
 

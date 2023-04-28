@@ -1,8 +1,7 @@
 import { Router } from 'express';
 
-import { HTTP_STATUSE_CODES } from '../constants';
-
 import { GetCategories } from '../controllers/CategoryController';
+import { InternalError_500, OK_200 } from '../services/ApiService';
 
 const CategoryRouter = Router();
 
@@ -10,7 +9,7 @@ CategoryRouter.get(
 	'/:categoryName',
 	async (req, res, next) => {
 		try {
-			return res.status(HTTP_STATUSE_CODES.OK_200).json({
+			return OK_200(res, {
 				id: 1,
 				text: 'Home',
 				to: '/',
@@ -243,7 +242,7 @@ CategoryRouter.get(
 				],
 			});
 		} catch (err) {
-			res.status(HTTP_STATUSE_CODES.ITERNAL_ERROR_500);
+			return InternalError_500(res);
 			// next();
 		}
 	}

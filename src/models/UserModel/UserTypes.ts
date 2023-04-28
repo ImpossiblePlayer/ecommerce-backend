@@ -34,6 +34,7 @@ export type TUserMethods = {
 };
 
 export type TUserQueries = {
+	generateTokens(): Promise<string[]>;
 	comparePassword(password: string): Promise<boolean>;
 	compareRefreshToken(token: string): Promise<boolean>;
 	getData(): Promise<

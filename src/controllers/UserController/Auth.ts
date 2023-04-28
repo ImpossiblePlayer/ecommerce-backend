@@ -1,13 +1,12 @@
 import { User } from '../../models/UserModel';
 
-import { HTTP_STATUSE_CODES } from '../../constants';
-
-import type { Request, Response } from 'express';
 import {
 	BadRequest_400,
 	InternalError_500,
 	OK_200,
 } from '../../services/ApiService';
+
+import type { Request, Response } from 'express';
 
 export const RegisterAccount = async (req: Request, res: Response) => {
 	try {
@@ -56,7 +55,7 @@ export const Authorize = async (req: Request, res: Response) => {
 				: BadRequest_400(res, { message: 'incorrect password' });
 		}
 	} catch (err) {
-		return res.status(HTTP_STATUSE_CODES.ITERNAL_ERROR_500);
+		return InternalError_500(res);
 	}
 };
 
