@@ -1,22 +1,21 @@
 import jwt from 'jsonwebtoken';
-import { User } from '../../models/UserModel/index.js';
+import { User } from '../../models/UserModel';
 import {
 	JWT_ACCESS_SECRET_KEY,
+	JWT_ACCESS_TOKEN_LIFETIME,
 	JWT_REFRESH_SECRET_KEY,
-} from '../../constants.js';
+	JWT_REFRESH_TOKEN_LIFETIME,
+} from '../../constants';
 
 export const generateTokens = (payload) => {
 	const accessToken = jwt.sign(payload, JWT_ACCESS_SECRET_KEY, {
-		expiresIn: '15m',
+		expiresIn: JWT_ACCESS_TOKEN_LIFETIME,
 	});
 	const refreshToken = jwt.sign(payload, JWT_REFRESH_SECRET_KEY, {
-		expiresIn: '30d',
+		expiresIn: JWT_REFRESH_TOKEN_LIFETIME,
 	});
 
-	return {
-		accessToken,
-		refreshToken,
-	};
+	return [accessToken, refreshToken];
 };
 
 export const saveToken = async (userId: string, refreshToken: string) => {
@@ -32,7 +31,7 @@ export const saveToken = async (userId: string, refreshToken: string) => {
 
 export const removeToken = async (refreshToken: string) => {
 	const user = await User.findOne({ refreshToken });
-	if (!user || !user.refreshToken) user.refreshToken = null;
+	if (!user || !user.refreshToken) return null;
 };
 
 export const validateAccessToken = async (token) => {

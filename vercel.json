@@ -1,8 +1,8 @@
 {
 	"version": 2,
-	"devCommand": "yarn run start",
-	"installCommand": "yarn",
 	"buildCommand": "yarn run build",
+	"devCommand": "yarn run dev",
+	"installCommand": "yarn install",
 	"outputDirectory": "dist",
 	"builds": [
 		{

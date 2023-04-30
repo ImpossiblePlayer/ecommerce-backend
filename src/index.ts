@@ -4,16 +4,19 @@ import fileUpload from 'express-fileupload';
 import cookieParser from 'cookie-parser';
 
 require('dotenv').config(); // переменные из .env файл
+import { CLIENT_URL } from './constants';
 
 import { Database } from './database';
-import { UserRouter } from './routes/UserRouter';
-import { ProductRouter } from './routes/ProductRouter';
-import { CategoryRouter } from './routes/CategoriesRouter';
+import { ProductRouter, UserRouter, CategoryRouter } from './routes';
 
 const port = process.env.PORT ?? 3000;
 
 const app = express();
-app.use(cors()).use(express.json()).use(fileUpload({})).use(cookieParser());
+app
+	.use(cors({ origin: CLIENT_URL, credentials: true }))
+	.use(express.json())
+	.use(fileUpload({}))
+	.use(cookieParser());
 
 app
 	.use('/user', UserRouter)

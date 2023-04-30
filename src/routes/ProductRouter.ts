@@ -8,7 +8,7 @@ import {
 const ProductRouter = Router();
 
 ProductRouter.get('/:productId', GetProduct);
+ProductRouter.put('/:productId', UpdateProduct);
 ProductRouter.post('/', CreateProduct);
-ProductRouter.put('/', UpdateProduct);
 
 export { ProductRouter };

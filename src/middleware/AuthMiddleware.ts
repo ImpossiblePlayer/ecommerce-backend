@@ -1,9 +1,10 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
-import { HTTP_STATUSE_CODES, JWT_REFRESH_SECRET_KEY } from '../constants';
+import { JWT_REFRESH_SECRET_KEY } from '../constants';
 
 import { User } from '../models/UserModel';
 import type { NextFunction, Request, Response } from 'express';
+import { BadRequest_400, Forbidden_403 } from '../services/ApiService';
 
 interface Req extends Request {
 	userId: string;
@@ -28,20 +29,14 @@ export const AuthenticationMiddleware = (
 			req.userId = decodedToken._id; // и возвращаем id пользователя
 			const candidate = User.findOne({});
 			if (!candidate) {
-				return res
-					.status(HTTP_STATUSE_CODES.BAD_REQUEST_400)
-					.json({ message: 'wrong token' });
+				return BadRequest_400(res, { message: 'wrong token' });
 			}
 			return next();
 		} catch (err) {
 			console.log(err);
-			return res
-				.status(HTTP_STATUSE_CODES.FORBIDDEN_403)
-				.json({ message: 'not authorized' });
+			return Forbidden_403(res, { message: 'not authorized' });
 		}
 	}
 
-	return res
-		.status(HTTP_STATUSE_CODES.FORBIDDEN_403)
-		.json({ message: 'can not access' });
+	return Forbidden_403(res, { message: 'can not access' });
 };

@@ -1,6 +1,10 @@
 import { Product } from '../models/ProductModel';
 
-import { HTTP_STATUSE_CODES } from '../constants';
+import {
+	OK_200,
+	NotFound_404,
+	InternalError_500,
+} from '../services/ApiService';
 
 import type { Request, Response } from 'express';
 
@@ -10,22 +14,22 @@ export const GetProduct = async (req: Request, res: Response) => {
 
 		const product = await Product.findById(productId);
 		if (!product) {
-			return res
-				.status(HTTP_STATUSE_CODES.NOT_FOUND_404)
-				.json({ message: `there is no product with id '${productId}'` });
+			return NotFound_404(res, {
+				message: `there is no product with id '${productId}'`,
+			});
 		}
 		const productData = product._doc;
-		return res
-			.status(HTTP_STATUSE_CODES.OK_200)
-			.json({ ...productData, id: product._id });
+		return OK_200(res, { ...productData, id: product._id });
 	} catch (err) {
-		return res.status(HTTP_STATUSE_CODES.ITERNAL_ERROR_500);
+		return InternalError_500(res);
 	}
 };
 
 export const CreateProduct = async (req: Request, res: Response) => {
 	try {
-	} catch (err) {}
+	} catch (err) {
+		return InternalError_500(res);
+	}
 };
 
 export const UpdateProduct = async (req: Request, res: Response) => {};
