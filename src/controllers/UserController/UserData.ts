@@ -1,7 +1,6 @@
 import { User } from '../../models/UserModel';
 
-import { HTTP_STATUSE_CODES } from '../../constants';
-
+import { NotFound_404, OK_200 } from '../../services/ApiService';
 import type { Request, Response } from 'express';
 
 export const GetUserData = async (req: Request, res: Response) => {
@@ -10,9 +9,9 @@ export const GetUserData = async (req: Request, res: Response) => {
 
 		const user = await User.findById(userId);
 		if (!user) {
-			return res.status(HTTP_STATUSE_CODES.NOT_FOUND_404);
+			return NotFound_404;
 		}
 		const data = await user.getData();
-		return res.status(HTTP_STATUSE_CODES.OK_200).json({ data });
+		return OK_200(res, { data });
 	} catch (err) {}
 };

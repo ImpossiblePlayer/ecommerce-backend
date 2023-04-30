@@ -1,4 +1,3 @@
-import { Schema, WindowOperatorReturningNumber } from 'mongoose';
 import { IDocument } from '../models';
 
 export type TUserSocialMedia = {
@@ -20,13 +19,14 @@ export type TUserAddress = {
 };
 export interface IUserSchema extends IDocument<IUserSchema> {
 	name: string;
-	role: 'customer' | 'seller';
+	role: 'customer' | 'seller' | 'admin';
 	profilePic: string;
 	address?: Partial<TUserAddress>;
 	socialMedia?: Partial<TUserContacts>;
 	email: string;
 	hash: string;
 	refreshToken: string[];
+	isActivated: boolean;
 }
 
 export type TUserMethods = {
@@ -34,6 +34,7 @@ export type TUserMethods = {
 };
 
 export type TUserQueries = {
+	generateTokens(): Promise<string[]>;
 	comparePassword(password: string): Promise<boolean>;
 	compareRefreshToken(token: string): Promise<boolean>;
 	getData(): Promise<

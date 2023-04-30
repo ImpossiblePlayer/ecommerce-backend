@@ -1,6 +1,10 @@
 import { User } from '../../models/UserModel';
 
-import { HTTP_STATUSE_CODES } from '../../constants';
+import {
+	BadRequest_400,
+	InternalError_500,
+	OK_200,
+} from '../../services/ApiService';
 
 import type { Request, Response } from 'express';
 
@@ -10,29 +14,27 @@ export const RegisterAccount = async (req: Request, res: Response) => {
 		const email = req.body.email.trim();
 		const password = req.body.password;
 		if (!name || !email || !password) {
-			return res.status(HTTP_STATUSE_CODES.BAD_REQUEST_400).json({
+			return BadRequest_400(res, {
 				message: `'name', 'email', or/and 'password' fields are empty`,
 			});
 		}
 
 		if (!/\S+@\S+\.\S+/.test(email) || !/^[a-zA-Z0-9]+$/.test(name)) {
-			return res
-				.status(HTTP_STATUSE_CODES.BAD_REQUEST_400)
-				.json({ message: `fields 'name' or 'email' contain invalid values` });
+			return BadRequest_400(res, {
+				message: `fields 'name' or 'email' contain invalid values`,
+			});
 		}
 
 		const candidate = await User.findOne({ email });
 		if (candidate) {
-			return res
-				.status(HTTP_STATUSE_CODES.BAD_REQUEST_400)
-				.json({ message: 'user already exists' });
+			return BadRequest_400(res, { message: 'user already exists' });
 		}
 
 		const doc = new User({ name, email });
 		doc.setPassword(password);
 		await doc.save();
 	} catch (err) {
-		return res.status(HTTP_STATUSE_CODES.ITERNAL_ERROR_500);
+		return InternalError_500(res);
 	}
 };
 
@@ -41,23 +43,19 @@ export const Authorize = async (req: Request, res: Response) => {
 		const email = req.body.email.trim();
 		const password = req.body.password;
 		if (!email || !password) {
-			return res
-				.status(HTTP_STATUSE_CODES.BAD_REQUEST_400)
-				.json({ message: 'email or/and password fields are empty' });
+			return BadRequest_400(res, {
+				message: 'email or/and password fields are empty',
+			});
 		}
 		const user = await User.findOne({ email: email });
 		if (user) {
 			const isCorrectPassword: boolean = await user.comparePassword(password);
 			return isCorrectPassword
-				? res
-						.status(HTTP_STATUSE_CODES.OK_200)
-						.json({ message: 'successfully authorized' })
-				: res
-						.status(HTTP_STATUSE_CODES.BAD_REQUEST_400)
-						.json({ message: 'incorrect password' });
+				? OK_200(res, { message: 'successfully authorized' })
+				: BadRequest_400(res, { message: 'incorrect password' });
 		}
 	} catch (err) {
-		return res.status(HTTP_STATUSE_CODES.ITERNAL_ERROR_500);
+		return InternalError_500(res);
 	}
 };
 
@@ -66,16 +64,17 @@ export const DeleteAccount = async (req: Request, res: Response) => {
 		const { email, password } = req.body;
 
 		if (!email || !password) {
-			return res
-				.status(HTTP_STATUSE_CODES.BAD_REQUEST_400)
-				.json({ message: `both fields 'email' and 'password' are required` });
+			return BadRequest_400(res, {
+				message: `both fields 'email' and 'password' are required`,
+			});
 		}
 
 		const user = await User.findOne({ email: email });
-		if (user.comparePassword(password)) {
+		if (user) {
+			await user.comparePassword(password);
 			return user._doc;
 		}
 	} catch (err) {
-		return res.status(HTTP_STATUSE_CODES.ITERNAL_ERROR_500);
+		return InternalError_500(res);
 	}
 };
