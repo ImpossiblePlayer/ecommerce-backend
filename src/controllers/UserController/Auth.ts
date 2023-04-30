@@ -70,7 +70,8 @@ export const DeleteAccount = async (req: Request, res: Response) => {
 		}
 
 		const user = await User.findOne({ email: email });
-		if (user.comparePassword(password)) {
+		if (user) {
+			await user.comparePassword(password);
 			return user._doc;
 		}
 	} catch (err) {

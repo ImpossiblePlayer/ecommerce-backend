@@ -27,7 +27,9 @@ export const GetProduct = async (req: Request, res: Response) => {
 
 export const CreateProduct = async (req: Request, res: Response) => {
 	try {
-	} catch (err) {}
+	} catch (err) {
+		return InternalError_500(res);
+	}
 };
 
 export const UpdateProduct = async (req: Request, res: Response) => {};

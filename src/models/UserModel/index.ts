@@ -2,6 +2,13 @@ import { model, Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
+import {
+	JWT_ACCESS_SECRET_KEY,
+	JWT_ACCESS_TOKEN_LIFETIME,
+	JWT_REFRESH_SECRET_KEY,
+	JWT_REFRESH_TOKEN_LIFETIME,
+} from '../../constants';
+
 import type {
 	TUserAddress,
 	TUserSocialMedia,
@@ -10,7 +17,6 @@ import type {
 	TUserModel,
 	IUserSchema,
 } from './UserTypes';
-import { JWT_ACCESS_SECRET_KEY, JWT_REFRESH_SECRET_KEY } from '../../constants';
 
 const AddressSchema = new Schema<TUserAddress>({
 	country: String,
@@ -52,6 +58,7 @@ export const UserSchema = new Schema<
 	},
 	hash: { type: String, required: true },
 	refreshToken: [String],
+	isActivated: Boolean,
 });
 
 UserSchema.methods.setPassword = async function (
@@ -63,7 +70,7 @@ UserSchema.query.comparePassword = async function (
 	password: string
 ): Promise<boolean> {
 	const hash = await bcrypt.hash(password, 10);
-	return bcrypt.compare(password, hash);
+	return await bcrypt.compare(password, hash);
 };
 
 UserSchema.query.compareRefreshToken = async function (
@@ -82,10 +89,10 @@ UserSchema.query.generateTokens = async function (): Promise<string[]> {
 	};
 
 	const accessToken = jwt.sign(payload, JWT_ACCESS_SECRET_KEY, {
-		expiresIn: '15m',
+		expiresIn: JWT_ACCESS_TOKEN_LIFETIME,
 	});
 	const refreshToken = jwt.sign(payload, JWT_REFRESH_SECRET_KEY, {
-		expiresIn: '30d',
+		expiresIn: JWT_REFRESH_TOKEN_LIFETIME,
 	});
 
 	return [accessToken, refreshToken];

@@ -9,11 +9,9 @@ import { AuthenticationMiddleware } from '../middleware/AuthMiddleware';
 
 const UserRouter = Router();
 
-UserRouter.use(AuthenticationMiddleware);
-
-UserRouter.post('/login', Authorize);
+UserRouter.post('/login', AuthenticationMiddleware, Authorize);
 UserRouter.post('/', RegisterAccount);
-UserRouter.delete('/', DeleteAccount);
+UserRouter.delete('/', AuthenticationMiddleware, DeleteAccount);
 UserRouter.get('/:userId', GetUserData);
 
 export { UserRouter };

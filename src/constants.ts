@@ -13,7 +13,12 @@ export const JWT_REFRESH_SECRET_KEY: string =
 	process.env.JWT_REFRESH_SECRET_KEY ?? '';
 export const JWT_ACCESS_SECRET_KEY: string =
 	process.env.JWT_ACCESS_SECRET_KEY ?? '';
-export const JWT_ACCESS_TOKEN_LIFETIME =
+export const JWT_ACCESS_TOKEN_LIFETIME: string =
 	process.env.JWT_ACCESS_TOKEN_LIFETIME ?? '';
-export const JWT_REFRESH_TOKEN_LIFETIME =
+export const JWT_REFRESH_TOKEN_LIFETIME: string =
 	process.env.JWT_REFRESH_TOKEN_LIFETIME ?? '';
+
+export const CLIENT_URL =
+	process.env.NODE_ENV === 'production'
+		? process.env.PROD_URL
+		: process.env.DEV_URL;
