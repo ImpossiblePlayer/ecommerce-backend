@@ -58,7 +58,7 @@ export const UserSchema = new Schema<
 	},
 	hash: { type: String, required: true },
 	refreshTokens: [String],
-	isActivated: Boolean,
+	isActivated: { type: Boolean, default: true },
 });
 
 UserSchema.methods.setPassword = async function (
