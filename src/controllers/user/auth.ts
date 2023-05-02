@@ -29,6 +29,8 @@ export const RegisterAccount = async (req: Request, res: Response) => {
 		const doc = new User({ name, email });
 		doc.setPassword(password);
 		await doc.save();
+
+		return OK_200(res, { message: 'successfully registered account' });
 	} catch (err) {
 		return InternalError_500(res);
 	}
@@ -43,18 +45,23 @@ export const Authorize = async (req: Request, res: Response) => {
 				message: 'email or/and password fields are empty',
 			});
 		}
-		const user = await User.findOne({ email: email });
-		if (user) {
-			const isCorrectPassword: boolean = await user.comparePassword(password);
-			if (!isCorrectPassword)
-				return BadRequest_400(res, { message: 'incorrect password' });
 
-			const [accessToken, refreshToken] = await user.generateTokens();
-			return OK_200(res, {
-				message: 'successfully authorized',
-				accessToken,
-			}).cookie('refreshToken', refreshToken);
+		const user = await User.findOne({ email: email });
+		if (!user) {
+			return BadRequest_400(res, {
+				message: 'email or/and password fields are incorrect',
+			});
 		}
+		const isCorrectPassword: boolean = await user.comparePassword(password);
+		if (!isCorrectPassword)
+			return BadRequest_400(res, { message: 'incorrect password' });
+
+		const [accessToken, refreshToken] = await user.generateTokens();
+
+		return OK_200(res, {
+			message: 'successfully authorized',
+			accessToken,
+		}).cookie('refreshToken', refreshToken);
 	} catch (err) {
 		return InternalError_500(res);
 	}
@@ -70,11 +77,16 @@ export const DeleteAccount = async (req: Request, res: Response) => {
 			});
 		}
 
-		const user = await User.findOne({ email: email });
-		if (user) {
-			await user.comparePassword(password);
-			return user._doc;
-		}
+		const user = await User.findOne({ email });
+		if (!user) return BadRequest_400(res, { message: 'user not found' });
+
+		const isCorrectPassword = await user.comparePassword(password);
+
+		if (!isCorrectPassword) return BadRequest_400(res, { message: '' });
+
+		User.deleteOne({ email });
+
+		return OK_200(res, { message: 'successfully deleted user' });
 	} catch (err) {
 		return InternalError_500(res);
 	}
