@@ -30,4 +30,4 @@ app.listen(port, () => {
 	console.log(`app listening on port ${port}`);
 });
 
-export { app };
+export default app;
