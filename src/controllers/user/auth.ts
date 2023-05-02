@@ -53,8 +53,7 @@ export const Authorize = async (req: Request, res: Response) => {
 			return OK_200(res, {
 				message: 'successfully authorized',
 				accessToken,
-				refreshToken,
-			});
+			}).cookie('refreshToken', refreshToken);
 		}
 	} catch (err) {
 		return InternalError_500(res);
