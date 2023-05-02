@@ -1,9 +1,8 @@
 import { Router } from 'express';
 
-import { GetCategories } from '../controllers/CategoryController';
-import { InternalError_500, OK_200 } from '../services/ApiService';
-
-
+import { GetCategories } from '../controllers/category';
+import { InternalError_500, OK_200 } from '../services/api';
+import { HTTP_STATUSE_CODES } from '../constants';
 
 const fakeCategories = [
 	{
@@ -192,7 +191,7 @@ const fakeCategories = [
 			},
 		],
 	},
-]
+];
 
 const CategoryRouter = Router();
 

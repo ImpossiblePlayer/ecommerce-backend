@@ -1,12 +1,8 @@
 import { Schema } from 'mongoose';
-import { SellerReview, SellerReviewSchema } from '../ReviewModel';
-import { User } from '../UserModel';
+import { SellerReview, SellerReviewSchema } from '../review';
+import { User } from '../user';
 
-import type {
-	ISellerSchema,
-	TSellerModel,
-	TSellerDelivery,
-} from './SellerTypes';
+import type { ISellerSchema, TSellerModel, TSellerDelivery } from './types';
 
 const SellerDeliverySchema = new Schema<TSellerDelivery>({
 	cost: Number,

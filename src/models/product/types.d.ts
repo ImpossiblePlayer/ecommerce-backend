@@ -1,5 +1,5 @@
 import { IDocument } from '../models';
-import { TProductReview } from '../ReviewModel/ReviewTypes';
+import { TProductReview } from '../review/types';
 import type { Schema } from 'mongoose';
 
 export type TProductPhoto = {

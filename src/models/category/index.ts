@@ -1,8 +1,8 @@
 import { Schema, model } from 'mongoose';
 
-import { Product } from '../ProductModel';
+import { Product } from '../product';
 
-import type { ICategorySchema, TCategoryQueries } from './CategoryTypes';
+import type { ICategorySchema, TCategoryQueries } from './types';
 
 const CategorySchema = new Schema<ICategorySchema, {}, {}, TCategoryQueries>({
 	name: { type: String, required: true, trim: true },

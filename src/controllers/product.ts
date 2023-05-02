@@ -1,10 +1,6 @@
-import { Product } from '../models/ProductModel';
+import { Product } from '../models/product';
 
-import {
-	OK_200,
-	NotFound_404,
-	InternalError_500,
-} from '../services/ApiService';
+import { OK_200, NotFound_404, InternalError_500 } from '../services/api';
 
 import type { Request, Response } from 'express';
 

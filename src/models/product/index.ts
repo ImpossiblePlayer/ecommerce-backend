@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
 
-import { ProductReview, ProductReviewSchema } from '../ReviewModel';
-import { Seller } from '../SellerModel';
+import { ProductReview, ProductReviewSchema } from '../review';
+import { Seller } from '../seller';
 
 import type {
 	TProductPhoto,
@@ -10,7 +10,7 @@ import type {
 	IProductSchema,
 	TProductMethods,
 	TProductQueries,
-} from './ProductTypes';
+} from './types';
 
 const ProductPhotoSchema = new Schema<TProductPhoto>({
 	url: { type: Schema.Types.UUID, required: true },

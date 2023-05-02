@@ -1,11 +1,7 @@
 import { Router } from 'express';
-import {
-	Authorize,
-	DeleteAccount,
-	RegisterAccount,
-} from '../controllers/UserController';
-import { GetUserData } from '../controllers/UserController';
-import { AuthenticationMiddleware } from '../middleware/AuthMiddleware';
+import { Authorize, DeleteAccount, RegisterAccount } from '../controllers/user';
+import { GetUserData } from '../controllers/user';
+import { AuthenticationMiddleware } from '../middleware/auth';
 
 const UserRouter = Router();
 

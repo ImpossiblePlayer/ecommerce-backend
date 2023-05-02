@@ -1,6 +1,6 @@
-import { User } from '../../models/UserModel';
+import { User } from '../../models/user';
 
-import { NotFound_404, OK_200 } from '../../services/ApiService';
+import { NotFound_404, OK_200 } from '../../services/api';
 import type { Request, Response } from 'express';
 
 export const GetUserData = async (req: Request, res: Response) => {
