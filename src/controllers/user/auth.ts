@@ -1,10 +1,6 @@
-import { User } from '../../models/UserModel';
+import { User } from '../../models/user';
 
-import {
-	BadRequest_400,
-	InternalError_500,
-	OK_200,
-} from '../../services/ApiService';
+import { BadRequest_400, InternalError_500, OK_200 } from '../../services/api';
 
 import type { Request, Response } from 'express';
 
@@ -50,9 +46,15 @@ export const Authorize = async (req: Request, res: Response) => {
 		const user = await User.findOne({ email: email });
 		if (user) {
 			const isCorrectPassword: boolean = await user.comparePassword(password);
-			return isCorrectPassword
-				? OK_200(res, { message: 'successfully authorized' })
-				: BadRequest_400(res, { message: 'incorrect password' });
+			if (!isCorrectPassword)
+				return BadRequest_400(res, { message: 'incorrect password' });
+
+			const [accessToken, refreshToken] = await user.generateTokens();
+			return OK_200(res, {
+				message: 'successfully authorized',
+				accessToken,
+				refreshToken,
+			});
 		}
 	} catch (err) {
 		return InternalError_500(res);
@@ -77,4 +79,9 @@ export const DeleteAccount = async (req: Request, res: Response) => {
 	} catch (err) {
 		return InternalError_500(res);
 	}
+};
+
+export const Authenticate = async (req: Request, res: Response) => {
+	try {
+	} catch (err) {}
 };

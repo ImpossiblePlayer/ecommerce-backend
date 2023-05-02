@@ -1,4 +1,4 @@
 // export * from './AdminRouter';
-export * from './CategoriesRouter';
-export * from './ProductRouter';
-export * from './UserRouter';
+export * from './category';
+export * from './product';
+export * from './user';

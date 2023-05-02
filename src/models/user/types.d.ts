@@ -25,7 +25,7 @@ export interface IUserSchema extends IDocument<IUserSchema> {
 	socialMedia?: Partial<TUserContacts>;
 	email: string;
 	hash: string;
-	refreshToken: string[];
+	refreshTokens: string[];
 	isActivated: boolean;
 }
 

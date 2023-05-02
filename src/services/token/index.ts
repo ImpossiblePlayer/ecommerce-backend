@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import { User } from '../../models/UserModel';
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import { User } from '../../models/user';
 import {
 	JWT_ACCESS_SECRET_KEY,
 	JWT_ACCESS_TOKEN_LIFETIME,
@@ -7,7 +7,7 @@ import {
 	JWT_REFRESH_TOKEN_LIFETIME,
 } from '../../constants';
 
-export const generateTokens = (payload) => {
+export const GenerateTokens = (payload: JwtPayload) => {
 	const accessToken = jwt.sign(payload, JWT_ACCESS_SECRET_KEY, {
 		expiresIn: JWT_ACCESS_TOKEN_LIFETIME,
 	});
@@ -18,23 +18,23 @@ export const generateTokens = (payload) => {
 	return [accessToken, refreshToken];
 };
 
-export const saveToken = async (userId: string, refreshToken: string) => {
+export const SaveToken = async (userId: string, refreshToken: string) => {
 	const user = await User.findById(userId);
 
 	if (user) {
-		user.refreshToken.push(refreshToken);
+		user.refreshTokens.push(refreshToken);
 		return user.save();
 	}
 
 	return;
 };
 
-export const removeToken = async (refreshToken: string) => {
+export const RemoveToken = async (refreshToken: string) => {
 	const user = await User.findOne({ refreshToken });
-	if (!user || !user.refreshToken) return null;
+	if (!user || !user.refreshTokens) return null;
 };
 
-export const validateAccessToken = async (token) => {
+export const ValidateAccessToken = async (token) => {
 	try {
 		const userData = jwt.verify(token, JWT_ACCESS_SECRET_KEY);
 		return userData;
@@ -43,7 +43,7 @@ export const validateAccessToken = async (token) => {
 	}
 };
 
-export const validateRefreshToken = async (token) => {
+export const ValidateRefreshToken = async (token) => {
 	try {
 		const userData = jwt.verify(token, JWT_REFRESH_SECRET_KEY);
 		return userData;
@@ -52,7 +52,7 @@ export const validateRefreshToken = async (token) => {
 	}
 };
 
-export const findToken = async (refreshToken) => {
+export const FindToken = async (refreshToken) => {
 	const user = await User.findOne({ refreshToken });
 
 	return user ? true : false;

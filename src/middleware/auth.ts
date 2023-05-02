@@ -2,9 +2,9 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 import { JWT_REFRESH_SECRET_KEY } from '../constants';
 
-import { User } from '../models/UserModel';
+import { User } from '../models/user';
 import type { NextFunction, Request, Response } from 'express';
-import { BadRequest_400, Forbidden_403 } from '../services/ApiService';
+import { BadRequest_400, Forbidden_403 } from '../services/api';
 
 interface Req extends Request {
 	userId: string;

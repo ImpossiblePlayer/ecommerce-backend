@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 import {
 	JWT_ACCESS_SECRET_KEY,
@@ -16,7 +16,7 @@ import type {
 	TUserMethods,
 	TUserModel,
 	IUserSchema,
-} from './UserTypes';
+} from './types';
 
 const AddressSchema = new Schema<TUserAddress>({
 	country: String,
@@ -57,7 +57,7 @@ export const UserSchema = new Schema<
 		trim: true,
 	},
 	hash: { type: String, required: true },
-	refreshToken: [String],
+	refreshTokens: [String],
 	isActivated: Boolean,
 });
 
@@ -76,9 +76,10 @@ UserSchema.query.comparePassword = async function (
 UserSchema.query.compareRefreshToken = async function (
 	token: string
 ): Promise<boolean> {
-	return this.refreshToken.filter(
-		(refreshToken: string) => refreshToken == token
+	const validTokens: Array<string[]> = this.refreshTokens.filter(
+		(refreshToken: string) => refreshToken === token
 	);
+	return validTokens.length > 0;
 };
 
 UserSchema.query.generateTokens = async function (): Promise<string[]> {
@@ -94,6 +95,8 @@ UserSchema.query.generateTokens = async function (): Promise<string[]> {
 	const refreshToken = jwt.sign(payload, JWT_REFRESH_SECRET_KEY, {
 		expiresIn: JWT_REFRESH_TOKEN_LIFETIME,
 	});
+
+	this.refreshTokens.push(refreshToken);
 
 	return [accessToken, refreshToken];
 };
