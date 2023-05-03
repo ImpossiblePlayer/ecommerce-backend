@@ -5,7 +5,7 @@ import { AuthenticationMiddleware } from '../middleware/auth';
 
 const UserRouter = Router();
 
-UserRouter.post('/login', AuthenticationMiddleware, Authorize);
+UserRouter.post('/login', Authorize);
 UserRouter.post('/', RegisterAccount);
 UserRouter.delete('/', AuthenticationMiddleware, DeleteAccount);
 UserRouter.get('/:userId', GetUserData);
