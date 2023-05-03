@@ -56,7 +56,7 @@ export const UserSchema = new Schema<
 		required: true,
 		trim: true,
 	},
-	hash: { type: String, required: true },
+	hash: String,
 	refreshTokens: [String],
 	isActivated: { type: Boolean, default: true },
 });
