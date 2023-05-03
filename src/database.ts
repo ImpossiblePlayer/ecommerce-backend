@@ -5,7 +5,7 @@ mongoose.set('strictQuery', false);
 export class Database {
 	static connect = async () => {
 		await mongoose
-			.connect(process.env.DATABASE_URL)
+			.connect(process.env.MONGODB_URI)
 			.then(() => {
 				console.log('DB ok');
 			})

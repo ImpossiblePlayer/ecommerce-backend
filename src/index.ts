@@ -6,16 +6,16 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 
 require('dotenv').config(); // переменные из .env файл
-import { CLIENT_URL } from './constants';
 
 import { Database } from './database';
 import { ProductRouter, UserRouter, CategoryRouter } from './routes';
+import { CLIENT_URL } from './constants';
 
 const port = process.env.PORT ?? 3000;
 
 const app = express();
 app
-	.use(cors())
+	.use(cors({ origin: CLIENT_URL, credentials: true }))
 	.use(bodyParser.json())
 	.use(fileUpload({}))
 	.use(cookieParser())
