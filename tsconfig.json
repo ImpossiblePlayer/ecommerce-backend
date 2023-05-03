@@ -122,7 +122,7 @@
 	"ts-node": {
 		"require": ["tsconfig-paths/register"]
 	},
-	"typescript.preferences.importModuleSpecifier": "realpath",
+	// "typescript.preferences.importModuleSpecifier": "realpath",
 	"include": ["src"],
 	"exclude": ["node_modules", "**/*.spec.ts", "jest.config.js", "__tests__"]
 }
