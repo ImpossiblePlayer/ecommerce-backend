@@ -97,7 +97,7 @@
 	"compilerOptions": {
 		"target": "ESNext",
 		"module": "NodeNext",
-		"moduleResolution": "nodenext",
+		"moduleResolution": "node",
 		"allowJs": false, // Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files.
 		"removeComments": true,
 		"preserveConstEnums": true,
