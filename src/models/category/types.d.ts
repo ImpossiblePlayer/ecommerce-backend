@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { IDocument } from '../models';
+import { IDocument } from '@models/types';
 
 export interface ICategorySchema extends IDocument<ICategorySchema> {
 	name: string;

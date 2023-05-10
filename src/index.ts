@@ -8,7 +8,7 @@ import bodyParser from 'body-parser';
 require('dotenv').config(); // переменные из .env файл
 
 import { Database } from './database';
-import { ProductRouter, UserRouter, CategoryRouter } from './routes';
+import { ProductRouter, UserRouter, CategoryRouter } from '@routes';
 import { CLIENT_URL } from './constants';
 
 const port = process.env.PORT ?? 3000;
@@ -20,7 +20,7 @@ app
 	.use(fileUpload({}))
 	.use(cookieParser())
 	.use(
-		morgan('dev', function (tokens, req, res) {
+		morgan(function (tokens, req, res) {
 			return [
 				tokens.method(req, res),
 				tokens.url(req, res),

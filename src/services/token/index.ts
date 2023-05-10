@@ -1,11 +1,11 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { User } from '../../models/user';
+import { Customer } from '@models/customer';
 import {
 	JWT_ACCESS_SECRET_KEY,
 	JWT_ACCESS_TOKEN_LIFETIME,
 	JWT_REFRESH_SECRET_KEY,
 	JWT_REFRESH_TOKEN_LIFETIME,
-} from '../../constants';
+} from '@src/constants';
 
 export const GenerateTokens = (payload: JwtPayload) => {
 	const accessToken = jwt.sign(payload, JWT_ACCESS_SECRET_KEY, {
@@ -19,7 +19,7 @@ export const GenerateTokens = (payload: JwtPayload) => {
 };
 
 export const SaveToken = async (userId: string, refreshToken: string) => {
-	const user = await User.findById(userId);
+	const user = await Customer.findById(userId);
 
 	if (user) {
 		user.refreshTokens.push(refreshToken);
@@ -30,7 +30,7 @@ export const SaveToken = async (userId: string, refreshToken: string) => {
 };
 
 export const RemoveToken = async (refreshToken: string) => {
-	const user = await User.findOne({ refreshToken });
+	const user = await Customer.findOne({ refreshToken });
 	if (!user || !user.refreshTokens) return null;
 };
 
@@ -53,7 +53,7 @@ export const ValidateRefreshToken = async (token) => {
 };
 
 export const FindToken = async (refreshToken) => {
-	const user = await User.findOne({ refreshToken });
+	const user = await Customer.findOne({ refreshToken });
 
 	return user ? true : false;
 };

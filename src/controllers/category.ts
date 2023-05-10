@@ -1,7 +1,8 @@
-import { Category } from '../models/category';
+import { Category } from '@models/category';
 
 import { InternalError_500, NotFound_404, OK_200 } from '../services/api';
 import { buildTree } from '../services/category';
+
 import type { Request, Response } from 'express';
 
 export const GetCategories = async (req: Request, res: Response) => {

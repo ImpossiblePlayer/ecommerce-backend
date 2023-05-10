@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
 
-import { ProductReview, ProductReviewSchema } from '../review';
-import { Seller } from '../seller';
+import { ProductReview, ProductReviewSchema } from '@models/review';
+import { Seller } from '@models/seller';
 
 import type {
 	TProductPhoto,
