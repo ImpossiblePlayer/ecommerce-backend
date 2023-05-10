@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
-import { SellerReview, SellerReviewSchema } from '../review';
-import { User } from '../user';
+import { SellerReview, SellerReviewSchema } from '@models/review';
+import { Customer } from '@models/customer';
 
 import type { ISellerSchema, TSellerModel, TSellerDelivery } from './types';
 
@@ -23,4 +23,7 @@ export const SellerSchema = new Schema<ISellerSchema>({
 	reviews: { type: [SellerReviewSchema], ref: SellerReview },
 });
 
-export const Seller = User.discriminator<TSellerModel>('Seller', SellerSchema);
+export const Seller = Customer.discriminator<TSellerModel>(
+	'Seller',
+	SellerSchema
+);

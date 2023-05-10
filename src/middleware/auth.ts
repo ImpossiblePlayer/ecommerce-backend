@@ -1,10 +1,10 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
-import { JWT_REFRESH_SECRET_KEY } from '../constants';
+import { JWT_REFRESH_SECRET_KEY } from '@src/constants';
 
-import { User } from '../models/user';
+import { Customer } from '@models/customer';
 import type { NextFunction, Request, Response } from 'express';
-import { BadRequest_400, Unautorised_401 } from '../services/api';
+import { BadRequest_400, Unautorised_401 } from '@services/api';
 
 interface Req extends Request {
 	userId: string;
@@ -27,7 +27,7 @@ export const AuthenticationMiddleware = (
 			) as JwtPayload;
 
 			const { userId, email, isActivated } = decodedToken; // и возвращаем id пользователя
-			const candidate = User.findOne({ _id: userId, email, isActivated });
+			const candidate = Customer.findOne({ _id: userId, email, isActivated });
 			if (!candidate) {
 				return BadRequest_400(res, { message: 'wrong token' });
 			}

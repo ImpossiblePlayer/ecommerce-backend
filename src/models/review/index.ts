@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { TProductReviewText, TProductReview, TSellerReview } from './types';
-import { User } from '../user';
+import { Customer } from '@models/customer';
 
 const ProductReviewTextSchema = new Schema<TProductReviewText>({
 	advantages: { type: String, default: '', trim: true },
@@ -9,7 +9,7 @@ const ProductReviewTextSchema = new Schema<TProductReviewText>({
 });
 
 const ReviewSchema = new Schema<TProductReview>({
-	author: { type: Schema.Types.ObjectId, ref: User },
+	author: { type: Schema.Types.ObjectId, ref: Customer },
 	rating: Number,
 	likes: Number,
 	dislikes: Number,

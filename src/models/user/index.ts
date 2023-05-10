@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -7,15 +7,15 @@ import {
 	JWT_ACCESS_TOKEN_LIFETIME,
 	JWT_REFRESH_SECRET_KEY,
 	JWT_REFRESH_TOKEN_LIFETIME,
-} from '../../constants';
+} from '@src/constants';
 
 import type {
 	TUserAddress,
 	TUserSocialMedia,
 	TUserQueries,
 	TUserMethods,
-	TUserModel,
 	IUserSchema,
+	TUserModel,
 } from './types';
 
 const AddressSchema = new Schema<TUserAddress>({
@@ -40,8 +40,6 @@ export const UserSchema = new Schema<
 	name: {
 		type: String,
 		required: true,
-
-		trim: true,
 	},
 	profilePic: {
 		type: String,
@@ -60,6 +58,8 @@ export const UserSchema = new Schema<
 	refreshTokens: [String],
 	isActivated: { type: Boolean, default: true },
 });
+
+console.log(UserSchema);
 
 UserSchema.methods.setPassword = async function (
 	password: string
@@ -101,12 +101,4 @@ UserSchema.query.generateTokens = async function (): Promise<string[]> {
 	return [accessToken, refreshToken];
 };
 
-UserSchema.query.getData = async function () {
-	return {
-		name: this.name,
-		profilePic: this.profilePics,
-		socialMedia: this.socialMedia,
-	};
-};
-
-export const User = model<TUserModel>('User', UserSchema);
+export const UserModel = model<TUserModel>('user', UserSchema);
