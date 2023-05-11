@@ -1,6 +1,6 @@
 import { TUserQueries, IUserSchema } from '@models/user/types';
 
-export interface ICustomerSchema extends IUserSchema {}
+export type ICustomerSchema = IUserSchema
 
 export type TCustomerQueries = TUserQueries & {
 	getData(): Promise<

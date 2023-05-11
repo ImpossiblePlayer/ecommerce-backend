@@ -1,6 +1,7 @@
 import { Schema } from 'mongoose';
-import { SellerReview, SellerReviewSchema } from '@models/review';
+
 import { Customer } from '@models/customer';
+import { SellerReview, SellerReviewSchema } from '@models/review';
 
 import type { ISellerSchema, TSellerModel, TSellerDelivery } from './types';
 

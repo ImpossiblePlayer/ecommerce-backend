@@ -1,10 +1,10 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
 import { JWT_REFRESH_SECRET_KEY } from '@src/constants';
-
 import { Customer } from '@models/customer';
-import type { NextFunction, Request, Response } from 'express';
 import { BadRequest_400, Unautorised_401 } from '@services/api';
+
+import type { NextFunction, Request, Response } from 'express';
 
 interface Req extends Request {
 	userId: string;

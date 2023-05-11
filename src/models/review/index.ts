@@ -1,6 +1,8 @@
 import { model, Schema } from 'mongoose';
-import { TProductReviewText, TProductReview, TSellerReview } from './types';
+
 import { Customer } from '@models/customer';
+
+import { TProductReviewText, TProductReview, TSellerReview } from './types';
 
 const ProductReviewTextSchema = new Schema<TProductReviewText>({
 	advantages: { type: String, default: '', trim: true },
