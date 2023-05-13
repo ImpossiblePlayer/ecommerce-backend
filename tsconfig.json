@@ -94,35 +94,35 @@
 // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
 //--"skipLibCheck": true /* Skip type checking all .d.ts files. */,
 {
-	"compilerOptions": {
-		"target": "ESNext",
-		"module": "NodeNext",
-		"moduleResolution": "node",
-		"allowJs": false, // Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files.
-		"removeComments": true,
-		"preserveConstEnums": true,
-		"allowSyntheticDefaultImports": true,
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"baseUrl": "./src",
-		"paths": {
-			"@src/*": ["*"],
-			"@shared/*": ["shared/*"],
-			"@models/*": ["models/*"],
-			"@controllers/*": ["controllers/*"],
-			"@services/*": ["services/*"],
-			"@routes/*": ["routes/*"],
-			"@routes": ["routes"],
-			"@utils/*": ["utils/*"],
-			"@middleware/*": ["middleware/*"]
-		},
-		"rootDir": "./src",
-		"outDir": "./dist"
-	},
-	"ts-node": {
-		"require": ["tsconfig-paths/register"]
-	},
-	"typescript.preferences.importModuleSpecifier": "realpath",
-	"include": ["src"],
-	"exclude": ["node_modules", "**/*.spec.ts", "jest.config.js", "__tests__"]
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "node",
+    "allowJs": false, // Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files.
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@src/*": ["./*"],
+      "@src": ["."],
+      "@shared/*": ["shared/*"],
+      "@models/types": ["models/types"],
+      "@models": ["models"],
+      "@controllers": ["controllers"],
+      "@services": ["services"],
+      "@routes": ["routes"],
+      "@middleware": ["middleware"]
+    },
+    "rootDir": "./src",
+    "outDir": "./dist"
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "typescript.preferences.importModuleSpecifier": "realpath",
+  "include": ["src"],
+  "exclude": ["node_modules", "**/*.spec.ts", "jest.config.js", "__tests__"]
 }
