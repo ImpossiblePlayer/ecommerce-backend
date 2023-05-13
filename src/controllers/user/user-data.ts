@@ -1,5 +1,5 @@
-import { Customer } from '@models/customer';
-import { InternalError_500, NotFound_404, OK_200 } from '@services/api';
+import { Customer } from '@models';
+import { InternalError_500, NotFound_404, OK_200 } from '@services';
 
 import type { Request, Response } from 'express';
 

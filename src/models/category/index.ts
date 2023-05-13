@@ -1,7 +1,5 @@
 import { Schema, model } from 'mongoose';
 
-import { Product } from '@models/product';
-
 import type { ICategorySchema, TCategoryQueries } from './types';
 
 const CategorySchema = new Schema<
@@ -13,7 +11,7 @@ const CategorySchema = new Schema<
   name: { type: String, required: true, trim: true },
   photo: { type: String, required: false },
   parentId: { type: Schema.Types.ObjectId, ref: 'Category', default: null },
-  products: { type: [Schema.Types.ObjectId], ref: Product, required: true },
+  products: { type: [Schema.Types.ObjectId], ref: 'Product', required: true },
   featured: { type: Boolean, required: false },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: null },

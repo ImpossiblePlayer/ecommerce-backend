@@ -1,5 +1,5 @@
-import { Customer } from '@models/customer';
-import { BadRequest_400, InternalError_500, OK_200 } from '@services/api';
+import { Customer } from '@models';
+import { BadRequest_400, InternalError_500, OK_200 } from '@services';
 
 import type { Request, Response } from 'express';
 
@@ -93,6 +93,7 @@ export const DeleteAccount = async (req: Request, res: Response) => {
 
 export const Authenticate = async (req: Request, res: Response) => {
   try {
+    console.log();
   } catch (err) {
     return InternalError_500(res);
   }

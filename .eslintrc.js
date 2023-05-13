@@ -43,11 +43,18 @@ module.exports = {
           caseInsensitive: true,
         },
         'newlines-between': 'always',
-        pathGroups: FS_LAYERS.map((layer) => ({
-          pattern: `**/?(*)${layer}{,/**}`,
-          group: 'internal',
-          position: 'after',
-        })),
+        pathGroups: [
+          ...FS_LAYERS.map((layer) => ({
+            pattern: `**/?(*)${layer}{,/**}`,
+            group: 'internal',
+            position: 'after',
+          })),
+          {
+            pattern: `**/?(*)types{,/**}`,
+            group: 'type',
+            position: 'after',
+          },
+        ],
         distinctGroup: false,
         groups: [
           'builtin',

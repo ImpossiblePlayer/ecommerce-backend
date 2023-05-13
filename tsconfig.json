@@ -109,13 +109,12 @@
       "@src/*": ["./*"],
       "@src": ["."],
       "@shared/*": ["shared/*"],
-      "@models/*": ["models/*"],
-      "@controllers/*": ["controllers/*"],
-      "@services/*": ["services/*"],
-      "@routes/*": ["routes/*"],
+      "@models/types": ["models/types"],
+      "@models": ["models"],
+      "@controllers": ["controllers"],
+      "@services": ["services"],
       "@routes": ["routes"],
-      "@utils/*": ["utils/*"],
-      "@middleware/*": ["middleware/*"]
+      "@middleware": ["middleware"]
     },
     "rootDir": "./src",
     "outDir": "./dist"

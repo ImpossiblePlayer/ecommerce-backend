@@ -10,26 +10,11 @@ import {
 } from '@src/constants';
 
 import type {
-  TUserAddress,
-  TUserSocialMedia,
   TUserQueries,
   TUserMethods,
   IUserSchema,
   TUserModel,
 } from './types';
-
-const AddressSchema = new Schema<TUserAddress>({
-  country: String,
-  city: String,
-  street: String,
-  house: String,
-  postalCode: String,
-});
-const SocialMediasSchema = new Schema<TUserSocialMedia>({
-  instagram: String,
-  facebook: String,
-  twitter: String,
-});
 
 export const UserSchema = new Schema<
   IUserSchema,
@@ -41,12 +26,7 @@ export const UserSchema = new Schema<
     type: String,
     required: true,
   },
-  profilePic: {
-    type: String,
-    default: '/src/shared/assets/userPics/default.png',
-  },
-  address: AddressSchema,
-  socialMedia: SocialMediasSchema,
+
   email: {
     type: String,
     lowercase: true,
@@ -58,8 +38,6 @@ export const UserSchema = new Schema<
   refreshTokens: [String],
   isActivated: { type: Boolean, default: true },
 });
-
-console.log(UserSchema);
 
 UserSchema.methods.setPassword = async function (
   password: string
@@ -101,4 +79,4 @@ UserSchema.query.generateTokens = async function (): Promise<string[]> {
   return [accessToken, refreshToken];
 };
 
-export const UserModel = model<TUserModel>('user', UserSchema);
+export const User = model<TUserModel>('user', UserSchema);

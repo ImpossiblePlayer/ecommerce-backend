@@ -1,5 +1,5 @@
-import { IUserSchema, TUserModel } from '@models/customer/types';
-import { TSellerReview } from '@models/review/types';
+import { IUserSchema, TUserModel } from '@models';
+import { TSellerReview } from '@models/types';
 
 export type TSellerDelivery = {
   cost: number;

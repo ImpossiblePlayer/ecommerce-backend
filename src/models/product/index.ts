@@ -1,7 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import { ProductReview, ProductReviewSchema } from '@models/review';
-import { Seller } from '@models/seller';
+import { ProductReviewSchema } from '@models';
 
 import type {
   TProductPhoto,
@@ -40,9 +39,8 @@ export const ProductSchema = new Schema<
   additionalPhotos: [ProductPhotoSchema],
   price: { type: ProductPriceSchema, required: true },
   comments: {
-    type: Schema.Types.ObjectId,
-    ref: ProductReview,
-    required: true,
+    type: [Schema.Types.ObjectId],
+    ref: 'ProductReview',
   },
   rating: { type: Number, required: true },
   soldQuantity: { type: Number, required: true },
@@ -50,8 +48,8 @@ export const ProductSchema = new Schema<
   specifications: [ProductSpecificationSchema],
   advantages: { type: [String], required: true },
   reviewsCount: { type: Number, required: true },
-  reviews: { type: [ProductReviewSchema], ref: ProductReview },
-  sellerId: { type: Schema.Types.ObjectId, ref: Seller, required: true },
+  reviews: { type: [ProductReviewSchema], ref: 'ProductReview' },
+  sellerId: { type: Schema.Types.ObjectId, ref: 'Seller', required: true },
 });
 
 ProductSchema.methods.createProduct = async function (

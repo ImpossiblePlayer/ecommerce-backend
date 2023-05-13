@@ -1,5 +1,5 @@
-import { Product } from '@models/product';
-import { OK_200, NotFound_404, InternalError_500 } from '@services/api';
+import { Product } from '@models';
+import { OK_200, NotFound_404, InternalError_500 } from '@services';
 
 import type { Request, Response } from 'express';
 
@@ -28,4 +28,4 @@ export const CreateProduct = async (req: Request, res: Response) => {
   }
 };
 
-export const UpdateProduct = async (req: Request, res: Response) => {};
+export const UpdateProduct = async (req: Request, res: Response) => OK_200(res);
