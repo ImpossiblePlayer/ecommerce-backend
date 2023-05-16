@@ -5,9 +5,9 @@ import express from 'express';
 import fileUpload from 'express-fileupload';
 import morgan from 'morgan';
 
+import { ProductRouter, UserRouter, CategoryRouter } from '@routes';
 import { CLIENT_URL } from '@src/constants';
 import { Database } from '@src/database';
-import { ProductRouter, UserRouter, CategoryRouter } from '@routes';
 
 const port = process.env.PORT ?? 3000;
 

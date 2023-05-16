@@ -1,11 +1,16 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
-import { JWT_REFRESH_SECRET_KEY } from '@src/constants';
 import { Admin, Customer } from '@models';
-import type { TUserModel, TSellerModel } from '@models/types';
+import type {
+  ISellerSchema,
+  ICustomerSchema,
+  IAdminSchema,
+} from '@models/types';
 import { BadRequest_400, Unautorised_401 } from '@services';
+import { JWT_REFRESH_SECRET_KEY } from '@src/constants';
 
 import type { NextFunction, Request, Response } from 'express';
+import type { JwtPayload } from 'jsonwebtoken';
 import type { Model } from 'mongoose';
 
 interface Req extends Request {
@@ -17,7 +22,7 @@ const CheckAuth = (
   req: Req,
   res: Response,
   next: NextFunction,
-  model: Model<TUserModel | TSellerModel>
+  model: Model<ICustomerSchema | ISellerSchema | IAdminSchema>
 ) => {
   const token = req.cookies.authentication; // вытаскиваем токен из кукис
 
