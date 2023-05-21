@@ -7,20 +7,40 @@ const CategorySchema = new Schema<
   unknown,
   unknown,
   TCategoryQueries
->({
-  name: { type: String, required: true, trim: true },
-  photo: { type: String, required: false },
-  parentId: { type: Schema.Types.ObjectId, ref: 'Category', default: null },
-  products: { type: [Schema.Types.ObjectId], ref: 'Product', required: true },
-  featured: { type: Boolean, required: false },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: null },
-  deletedAt: { type: Date, default: null },
-});
+>(
+  {
+    name: { type: String, required: true, trim: true },
+    photo: { type: String, required: false },
+    subCategories: {
+      type: [Schema.Types.ObjectId],
+      ref: 'Category',
+      default: null,
+    },
+    parentCategory: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
+      default: null,
+    },
+    products: { type: [Schema.Types.ObjectId], ref: 'Product', required: true },
+    featured: { type: Boolean, required: false },
+    deletedAt: { type: Date, default: null },
+  },
+  {
+    query: {
+      getSubCategories: async function () {
+        return this.products;
+      },
+      addSubCategory: async function (id: string) {
+        const isUniqueId = this.subCategories.find((c) => c.id === id);
+        if (isUniqueId) return false;
 
-CategorySchema.query.getCategories = async function () {
-  return this.products;
-};
+        this.subCategories.push(id);
+        // TODO: subCategories
+      },
+    },
+    timestamps: true,
+  }
+);
 
 // авто-удаление из бд через месяц после того как появилось поле deletedAt с временем удаления
 CategorySchema.index({ deletedAt: 1 }, { expireAfterSeconds: 60 * 24 * 30 });

@@ -69,7 +69,7 @@ export const UpdateCategory = async (req: Request, res: Response) => {
     if (parentName) {
       const parentCategory = await Category.findOne({ name: parentName });
 
-      category.parentId = parentCategory.id;
+      category.parentCategory = parentCategory.id;
     }
 
     await category.save();

@@ -1,4 +1,4 @@
-import { TUserQueries, IUserSchema } from '@models';
+import { IUserSchema } from '@models';
 
 export type TUserSocialMedia = {
   facebook: string;
@@ -11,7 +11,7 @@ export type TUserContacts = {
   email: string;
   socialMedia: Partial<TUserSocialMedia>;
 };
-export type TUserAddress = {
+export type TCustomerAddress = {
   country: string;
   city: string;
   street: string;
@@ -21,10 +21,14 @@ export type TUserAddress = {
 
 export type ICustomerSchema = IUserSchema;
 
-export type TCustomerQueries = TUserQueries & {
+export type TCustomerQueries = {
   getData(): Promise<
     Pick<IUserSchema, 'name' & 'profilePic' & 'socialMedia' & 'role'>
   >;
 };
 
-export type TCustomerModel = ICustomerSchema & TCustomerQueries;
+export type TCustomerMethods = unknown;
+
+export type TCustomerModel = ICustomerSchema &
+  TCustomerQueries &
+  TCustomerMethods;

@@ -1,11 +1,11 @@
 const FS_LAYERS = [
-  'src',
   'routes',
   'controllers',
   'middleware',
   'models',
   'services',
   'shared',
+  'src',
 ];
 
 module.exports = {

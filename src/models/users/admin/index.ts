@@ -1,7 +1,14 @@
-import { Schema } from 'mongoose';
+import { model } from 'mongoose';
 
-import { User } from '@models';
+import { UserSchema } from '@models';
 
-export const AdminSchema = new Schema();
+import { IAdminSchema } from './types';
 
-export const Admin = User.discriminator('Admin', AdminSchema);
+export const AdminSchema = new UserSchema<IAdminSchema>(
+  {
+    admin: Boolean,
+  },
+  {}
+);
+
+export const Admin = model('Admin', AdminSchema);

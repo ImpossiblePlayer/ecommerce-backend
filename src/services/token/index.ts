@@ -1,12 +1,12 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
+import { Customer } from '@models';
 import {
   JWT_ACCESS_SECRET_KEY,
   JWT_ACCESS_TOKEN_LIFETIME,
   JWT_REFRESH_SECRET_KEY,
   JWT_REFRESH_TOKEN_LIFETIME,
 } from '@src/constants';
-import { Customer } from '@models';
 
 export const GenerateTokens = (payload: JwtPayload) => {
   const accessToken = jwt.sign(payload, JWT_ACCESS_SECRET_KEY, {
