@@ -1,16 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-import type {
-  TProductReviewText,
-  TProductReview,
-  TSellerReview,
-} from './types';
-
-const ProductReviewTextSchema = new Schema<TProductReviewText>({
-  advantages: { type: String, default: '', trim: true },
-  disadvantages: { type: String, default: '', trim: true },
-  comment: { type: String, default: '', trim: true },
-});
+import type { TProductReview, TSellerReview } from './types';
 
 const ReviewSchema = new Schema<TProductReview>({
   author: { type: Schema.Types.ObjectId, ref: 'Customer' },
@@ -22,7 +12,14 @@ const ReviewSchema = new Schema<TProductReview>({
 
 export const ProductReviewSchema = new Schema<TProductReview>({
   ...ReviewSchema.obj,
-  text: { type: ProductReviewTextSchema, required: true },
+  text: {
+    type: {
+      advantages: { type: String, default: '', trim: true },
+      disadvantages: { type: String, default: '', trim: true },
+      comment: { type: String, default: '', trim: true },
+    },
+    required: true,
+  },
   image: [Schema.Types.UUID],
 });
 
