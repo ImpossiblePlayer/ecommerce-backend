@@ -1,7 +1,7 @@
-import { Schema } from 'mongoose';
+import { Document } from 'mongoose';
 
 export interface IDocument<T> extends Document {
-  _doc: T & { _id: Schema.Types.ObjectId };
+  _doc: T;
 }
 
 export * from './category/types';

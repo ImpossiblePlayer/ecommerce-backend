@@ -5,7 +5,8 @@ import type { IDocument } from '@models/types';
 export interface ICategorySchema extends IDocument<ICategorySchema> {
   name: string;
   photo?: string;
-  parentId: Schema.Types.ObjectId | null;
+  subCategories: Schema.Types.ObjectId | null;
+  parentCategory: Schema.Types.ObjectId | null;
   products: Schema.Types.ObjectId[];
   featured?: boolean;
   createdAt: Date;
@@ -14,12 +15,12 @@ export interface ICategorySchema extends IDocument<ICategorySchema> {
 }
 
 export type TCategoryQueries = {
-  getCategories(): Promise<ICategorySchema[]>;
-  CreateCategory(
+  getSubCategories(): Promise<ICategorySchema[]>;
+  addSubCategory(
     id: string,
     text: string,
-    parentId: string
-  ): Promise<ICategorySchema>;
+    subCategories: string
+  ): Promise<boolean>;
 };
 
 export type TCategoryModel = ICategorySchema & TCategoryQueries;
