@@ -3,7 +3,7 @@
   "license": "MIT",
   "scripts": {
     "start": "tsc-alias && node ./dist/index.js",
-    "build": "yarn install && tsc",
+    "build": "tsc",
     "dev": "nodemon --inspect ./dist/index.js",
     "build:watch": "concurrently \"tsc -w\" \"tsc-alias -w\"",
     "eslint": "eslint .",
