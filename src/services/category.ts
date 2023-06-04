@@ -14,6 +14,7 @@ export const buildTree = async (categories) => {
       id: category._id,
       name: category.name,
       parentId: category.parentId || null,
+      productsCount: 512,
       children: (subtree.length && subtree) || null,
     };
 
