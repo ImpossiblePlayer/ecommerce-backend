@@ -6,7 +6,7 @@ import type { Request, Response } from 'express';
 export const GetCategories = async (req: Request, res: Response) => {
   try {
     const rootCategories = await Category.find({
-      parentId: null,
+      parentCategory: null,
       deletedAt: null,
     })
       .select('id name parentId children')
@@ -42,7 +42,7 @@ export const CreateCategory = async (req: Request, res: Response) => {
     if (name === '') {
       return NotFound_404(res);
     }
-    const doc = new Category({ name, parentId });
+    const doc = new Category({ name, parentCategory: parentId });
 
     await doc.save();
 
