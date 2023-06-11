@@ -9,6 +9,7 @@ export type TProductPhoto = {
 export type TProductSpecification = {
   name: string;
   value: string;
+  order: number;
 };
 export type TProductPrice = {
   current: number;
@@ -27,7 +28,6 @@ export interface IProductSchema extends IDocument<IProductSchema> {
   soldQuantity: number;
   description: string;
   orders: number;
-  specifications: TProductSpecification[];
   params: TProductSpecification[];
   advantages: string[];
   reviewsCount: number;
