@@ -5,7 +5,7 @@ export const buildTree = async (categories) => {
   for (let i = 0; i < categories.length; i++) {
     const category = categories[i];
     const children = await Category.find({
-      parentId: category._id,
+      parentCategory: category._id,
       deletedAt: null,
     });
     const subtree = await buildTree(children);
@@ -14,6 +14,7 @@ export const buildTree = async (categories) => {
       id: category._id,
       name: category.name,
       parentId: category.parentId || null,
+      productsCount: 512,
       children: (subtree.length && subtree) || null,
     };
 
