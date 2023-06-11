@@ -22,6 +22,12 @@ const GetProduct = async (req, res) => {
 exports.GetProduct = GetProduct;
 const CreateProduct = async (req, res) => {
     try {
+        const { name, categories, price } = req.body;
+        const { mainPhoto } = req.files;
+        const candidate = await _models_1.Product.findOne({ name, categories, price });
+        if (candidate) {
+            return (0, _services_1.BadRequest_400)(res, { message: 'Product already exists' });
+        }
     }
     catch (err) {
         return (0, _services_1.InternalError_500)(res);

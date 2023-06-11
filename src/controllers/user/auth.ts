@@ -22,7 +22,6 @@ export const Authorize = async (req: Request, res: Response) => {
 		}
 
 		const isCorrectPassword: boolean = await user.comparePassword(password);
-		console.log(124);
 		if (!isCorrectPassword)
 			return BadRequest_400(res, { message: 'incorrect password' });
 

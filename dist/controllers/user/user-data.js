@@ -8,7 +8,7 @@ const GetUserData = async (req, res) => {
         const { userId } = req.params;
         const user = await _models_1.Customer.findById(userId);
         if (!user) {
-            return _services_1.NotFound_404;
+            return (0, _services_1.NotFound_404)(res);
         }
         const data = await user.getData();
         return (0, _services_1.OK_200)(res, { data });
