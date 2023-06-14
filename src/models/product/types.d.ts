@@ -17,7 +17,7 @@ export type TProductPrice = {
 
 export interface IProductSchema extends IDocument<IProductSchema> {
   name: string;
-  categories: string[]; // ['clothing', 'men's wear', 'summer wear']
+  category: Schema.Types.ObjectId;
   quantity: number;
   mainPhoto: TProductPhoto;
   additionalPhotos: TProductPhoto[];

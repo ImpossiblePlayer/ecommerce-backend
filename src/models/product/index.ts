@@ -29,7 +29,7 @@ export const ProductSchema = new Schema<
   {
     name: { type: String, required: true, trim: true },
     description: { type: String, required: true },
-    categories: { type: [String], required: true, trim: true },
+    category: { type: Schema.Types.ObjectId, required: true, trim: true },
     quantity: { type: Number, required: true },
     params: [ProductSpecificationSchema],
     mainPhoto: { type: ProductPhotoSchema, required: true },
