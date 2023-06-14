@@ -17,7 +17,8 @@ const app = (0, express_1.default)();
 app
     .use((0, cors_1.default)({ origin: constants_1.CLIENT_URL, credentials: true }))
     .use(body_parser_1.default.json())
-    .use((0, express_fileupload_1.default)({}))
+    .use((0, express_fileupload_1.default)({ createParentPath: true }))
+    .use('images', express_1.default.static(`${__dirname}/images`))
     .use((0, cookie_parser_1.default)())
     .use((0, morgan_1.default)(function (tokens, req, res) {
     return [

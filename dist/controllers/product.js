@@ -22,6 +22,21 @@ const GetProduct = async (req, res) => {
 exports.GetProduct = GetProduct;
 const CreateProduct = async (req, res) => {
     try {
+        const { name, category, description, deliveryCost, quantity, advantages, price, productId, mainPhoto, additionalPhotos, } = req.body;
+        console.log(productId, mainPhoto, additionalPhotos);
+        if (!name ||
+            !description ||
+            !quantity ||
+            !price ||
+            !advantages ||
+            !category ||
+            !deliveryCost) {
+            return (0, _services_1.BadRequest_400)(res, {
+                message: 'data is not provided',
+            });
+        }
+        console.log(req.body);
+        return (0, _services_1.OK_200)(res, { message: 'success' });
     }
     catch (err) {
         return (0, _services_1.InternalError_500)(res);
