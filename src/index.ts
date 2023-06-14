@@ -15,7 +15,8 @@ const app = express();
 app
   .use(cors({ origin: CLIENT_URL, credentials: true }))
   .use(bodyParser.json())
-  .use(fileUpload({}))
+  .use(fileUpload({ createParentPath: true }))
+  .use('images', express.static(`${__dirname}/images`))
   .use(cookieParser())
   .use(
     morgan(function (tokens, req, res) {
