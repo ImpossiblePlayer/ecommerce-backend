@@ -23,6 +23,10 @@ exports.GetProduct = GetProduct;
 const CreateProduct = async (req, res) => {
     try {
         const { name, category, description, deliveryCost, quantity, advantages, price, productId, mainPhoto, additionalPhotos, } = req.body;
+        const candidate = await _models_1.Product.findOne({ productId, name, category });
+        if (candidate) {
+            return (0, _services_1.BadRequest_400)(res, { message: 'Product already exists' });
+        }
         console.log(productId, mainPhoto, additionalPhotos);
         if (!name ||
             !description ||
