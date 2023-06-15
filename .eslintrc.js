@@ -71,35 +71,35 @@ module.exports = {
 				],
 			},
 		],
-		'boundaries/element-types': [
-			'warn',
-			{
-				// Allow or disallow any dependency by default
-				default: 'allow',
-				// Define a custom message for this rule
-				message: '${file.type} is not allowed to import ${dependency.type}',
-				rules: [
-					{
-						from: ['@models'],
-						disallow: ['@src/constants', { family: from.family }],
-						message: `Models must not import others thing than constants, models`,
-					},
-					{
-						// In this type of files...
-						from: ['@services'],
-						// ...allow importing this type of elements
-						disallow: ['@src/constants', '@shared', '@models'],
-						// ...and return this custom error message
-						message: `Servies must not import others thing than constants, models and stuff from shared`,
-					},
-
-					{
-						from: ['@controllers'],
-						disallow: ['@src/constants', { family: from.family }],
-						message: `Models must not import others thing than constants, models`,
-					},
-				],
-			},
-		],
+		// 'boundaries/element-types': [
+		// 	'warn',
+		// 	{
+		// 		// Allow or disallow any dependency by default
+		// 		default: 'allow',
+		// 		// Define a custom message for this rule
+		// 		message: '${file.type} is not allowed to import ${dependency.type}',
+		// 		rules: [
+		// 			{
+		// 				from: ['@models'],
+		// 				disallow: ['@src/constants', { family: from.family }],
+		// 				message: `Models must not import others thing than constants, models`,
+		// 			},
+		// 			{
+		// 				// In this type of files...
+		// 				from: ['@services'],
+		// 				// ...allow importing this type of elements
+		// 				disallow: ['@src/constants', '@shared', '@models'],
+		// 				// ...and return this custom error message
+		// 				message: `Servies must not import others thing than constants, models and stuff from shared`,
+		// 			},
+		//
+		// 			{
+		// 				from: ['@controllers'],
+		// 				disallow: ['@src/constants', { family: from.family }],
+		// 				message: `Models must not import others thing than constants, models`,
+		// 			},
+		// 		],
+		// 	},
+		// ],
 	},
 };
