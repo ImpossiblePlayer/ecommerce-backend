@@ -3,12 +3,12 @@ import * as process from 'process';
 
 import { NextFunction, Request, Response } from 'express';
 import fileUpload from 'express-fileupload';
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 import { convertImagesFlat } from '@services';
 
 interface ReqWithImages extends Request {
-  productId?: string;
+  productId?: mongoose.Types.ObjectId;
   mainPhoto?: {
     url: string;
     thumbUrl: string;
@@ -42,7 +42,7 @@ export const CreateImages = (
         `${process.env.SERVER_URL}/src/${path}/${photo.name}`
     );
 
-  req.body.productId = productId.toString();
+  req.body.productId = productId;
   req.body.mainPhoto = { url: mainPhotoPath, thumbUrl: mainPhotoPath };
   req.body.additionalPhotos = additionalPhotosPaths;
 
