@@ -5,7 +5,7 @@ import express from 'express';
 import fileUpload from 'express-fileupload';
 import morgan from 'morgan';
 
-import { ProductRouter, UserRouter, CategoryRouter } from '@routes';
+import { ProductRouter, UserRouter, CategoryRouter } from '@routers';
 import { CLIENT_URL } from '@src/constants';
 import { Database } from '@src/database';
 
@@ -14,9 +14,8 @@ const port = process.env.PORT ?? 3000;
 const app = express();
 app
   .use(cors({ origin: CLIENT_URL, credentials: true }))
-  .use(bodyParser.json())
-  .use(fileUpload({ createParentPath: true }))
-  .use('images', express.static(`${__dirname}/images`))
+  .use(express.json())
+  .use(fileUpload({}))
   .use(cookieParser())
   .use(
     morgan(function (tokens, req, res) {
@@ -33,13 +32,13 @@ app
   );
 
 app
-  .use('/user', UserRouter)
-  .use('/product', ProductRouter)
-  .use('/category', CategoryRouter);
+	.use('/user', UserRouter)
+	.use('/product', ProductRouter)
+	.use('/category', CategoryRouter);
 
 Database.connect();
 app.listen(port, () => {
-  console.log(`app listening on port ${port}`);
+	console.log(`app listening on port ${port}`);
 });
 
 export default app;

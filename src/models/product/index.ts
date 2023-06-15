@@ -1,23 +1,23 @@
 import { model, Schema } from 'mongoose';
 
-import { ProductReviewSchema } from '@models';
+import { ProductReview, ProductReviewSchema } from '@models';
 
 import type {
-  TProductPhoto,
-  TProductPrice,
-  TProductSpecification,
-  IProductSchema,
-  TProductMethods,
-  TProductQueries,
+	TProductPhoto,
+	TProductPrice,
+	TProductSpecification,
+	IProductSchema,
+	TProductMethods,
+	TProductQueries,
 } from './types';
 
 const ProductPhotoSchema = new Schema<TProductPhoto>({
-  url: { type: Schema.Types.UUID, required: true },
-  thumbUrl: { type: Schema.Types.UUID, required: false },
+	url: { type: Schema.Types.UUID, required: true },
+	thumbUrl: { type: Schema.Types.UUID, required: false },
 });
 const ProductSpecificationSchema = new Schema<TProductSpecification>({
-  name: { type: String, required: true },
-  value: { type: String, required: true },
+	name: { type: String, required: true },
+	value: { type: String, required: true },
 });
 
 export const ProductSchema = new Schema<
@@ -41,14 +41,13 @@ export const ProductSchema = new Schema<
       },
       required: true,
     },
-    comments: {
-      type: [Schema.Types.ObjectId],
-      ref: 'ProductReview',
-    },
+    // comments: {
+    //   type: [Schema.Types.ObjectId],
+    //   ref: 'ProductReview',
+    // },
     rating: { type: Number, required: true },
     soldQuantity: { type: Number, required: true },
     orders: { type: Number, required: true },
-    specifications: [ProductSpecificationSchema],
     advantages: { type: [String], required: true },
     reviewsCount: { type: Number, required: true },
     reviews: { type: [ProductReviewSchema], ref: 'ProductReview' },
@@ -94,17 +93,17 @@ export const ProductSchema = new Schema<
           return false;
         }
 
-        this.name = name;
-        this.description = description;
-        this.categories = categories;
-        this.quantity = quantity;
-        this.mainPhoto = photos[0];
-        this.additionalPhotos = photos;
-        this.price = price;
-        return true;
-      },
-    },
-  }
+				this.name = name;
+				this.description = description;
+				this.categories = categories;
+				this.quantity = quantity;
+				this.mainPhoto = photos[0];
+				this.additionalPhotos = photos;
+				this.price = price;
+				return true;
+			},
+		},
+	}
 );
 
 export const Product = model<IProductSchema>('Product', ProductSchema);

@@ -32,8 +32,6 @@ class UserSchema extends mongoose_1.Schema {
                 setPassword: async function (password) {
                     this.hash = await bcrypt_1.default.hash(password, 10);
                 },
-            },
-            query: {
                 comparePassword: async function (password) {
                     const hash = await bcrypt_1.default.hash(password, 10);
                     return await bcrypt_1.default.compare(password, hash);
@@ -58,6 +56,7 @@ class UserSchema extends mongoose_1.Schema {
                     return [accessToken, refreshToken];
                 },
             },
+            query: {},
         });
     }
 }

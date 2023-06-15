@@ -3,8 +3,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./dist/index.js",
-    "build": "yarn install && yarn tsc && yarn tsc-alias",
     "dev": "nodemon --inspect ./dist/index.js",
+    "build": "tsc && tsc-alias",
     "build:watch": "concurrently \"tsc -w\" \"tsc-alias -w\"",
     "eslint": "eslint .",
     "eslint-fix": "eslint . --fix"
@@ -22,6 +22,7 @@
     "mongoose": "^7.0.3",
     "morgan": "^1.10.0",
     "supertest": "^6.3.0",
+    "tsc-alias": "^1.8.6",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -42,12 +43,12 @@
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-typescript": "^3.5.5",
-    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-boundaries": "^3.1.1",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-check-file": "^2.3.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
-    "tsc-alias": "^1.8.6",
     "typescript": "^5.0.4"
   }
 }

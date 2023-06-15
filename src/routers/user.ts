@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
 import {
-  Authorize,
-  DeleteAccount,
-  RegisterAccount,
-  GetUserData,
+	Authorize,
+	DeleteAccount,
+	RegisterAccount,
+	GetUserData,
 } from '@controllers';
 import { CustomerMiddleware } from '@middleware';
 
