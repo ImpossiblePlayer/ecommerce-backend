@@ -1,4 +1,3 @@
-import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
@@ -32,13 +31,11 @@ app
   );
 
 app
-	.use('/user', UserRouter)
-	.use('/product', ProductRouter)
-	.use('/category', CategoryRouter);
+  .use('/user', UserRouter)
+  .use('/product', ProductRouter)
+  .use('/category', CategoryRouter);
 
 Database.connect();
 app.listen(port, () => {
-	console.log(`app listening on port ${port}`);
+  console.log(`app listening on port ${port}`);
 });
-
-export default app;
